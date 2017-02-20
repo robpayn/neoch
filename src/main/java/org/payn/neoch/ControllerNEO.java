@@ -28,9 +28,9 @@ public abstract class ControllerNEO extends ControllerTimeStep {
       try 
       {
          MatrixBuilder builder = MatrixLoader.loadBuilder(
-               args, 
                new File(System.getProperty("user.dir")),
-               null
+               null,
+               args
                );
          HolonMatrix matrix = builder.createModel();
          ControllerNEO controller = matrix.getController();

@@ -27,6 +27,12 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
       globalBehaviors = new HashMap<String, Behavior>();
    }
 
+   @Override
+   public ControllerNEO getController()
+   {
+      return (ControllerNEO)controller;
+   }
+
    /**
     * Add a global behavior
     * 
@@ -108,9 +114,10 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
     *       if error in creating cell network
     */
    @Override
-   public HolonMatrix newModel() throws Exception
+   public HolonMatrix createModel() throws Exception
    {
       // Build the matrix
+      loggerManager.statusUpdate("");
       HolonMatrix matrix = buildMatrix();
       loggerManager.statusUpdate(String.format(
             "Matrix build time = %s ...", 

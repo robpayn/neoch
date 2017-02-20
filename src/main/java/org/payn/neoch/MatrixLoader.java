@@ -21,18 +21,18 @@ public abstract class MatrixLoader extends ModelLoader<MatrixBuilder> {
     *       command line arguments
     * @param workingDir
     *       working directory
-    * @param builderLoader 
+    * @param matrixLoader 
     *       loader for the builder (will look for definition in the command line if this is null)
     * @return
     *       the cell network controller created by the factory
     * @throws Exception
     *       if error in creating cell network
     */
-   public static MatrixBuilder loadBuilder(String[] args, File workingDir, MatrixLoader builderLoader) 
-         throws Exception
+   public static MatrixBuilder loadBuilder(File workingDir, 
+         MatrixLoader matrixLoader, String[] args) throws Exception
    {
       HashMap<String,String> argMap = createArgMap(args);
-      return loadBuilder(argMap, workingDir, builderLoader);
+      return loadBuilder(workingDir, matrixLoader, argMap);
    }
    
    /**
@@ -50,8 +50,8 @@ public abstract class MatrixLoader extends ModelLoader<MatrixBuilder> {
     * @throws Exception
     *       if error in loading
     */
-   public static MatrixBuilder loadBuilder(HashMap<String, String> argMap,
-         File workingDir, MatrixLoader matrixLoader) throws Exception 
+   public static MatrixBuilder loadBuilder(File workingDir, 
+         MatrixLoader matrixLoader, HashMap<String, String> argMap) throws Exception 
    {
       // Check for valid working directory
       if (!workingDir.exists()) 
