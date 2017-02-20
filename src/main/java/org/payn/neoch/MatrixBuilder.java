@@ -1,6 +1,5 @@
 package org.payn.neoch;
 
-import java.io.File;
 import java.util.HashMap;
 
 import org.payn.chsm.Behavior;
@@ -16,98 +15,10 @@ import org.payn.chsm.resources.time.BehaviorTime;
 public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
    
    /**
-    * Static method to build the matrix based on the initial configuration information in the xml
-    * file in the specified working directory.
-    * 
-    * @param args
-    *       command line arguments
-    * @param workingDir
-    *       working directory
-    * @param builderLoader 
-    *       loader for the builder (will look for definition in the command line if this is null)
-    * @return
-    *       the cell network controller created by the factory
-    * @throws Exception
-    *       if error in creating cell network
-    */
-   public static HolonMatrix createMatrix(String[] args, File workingDir, MatrixLoader builderLoader) 
-         throws Exception
-   {
-      HashMap<String,String> argMap = createArgMap(args);
-      return createMatrix(argMap, workingDir, builderLoader);
-   }
-   
-   /**
-    * Static method to build the matrix based on the initial configuration information in the xml
-    * file in the specified working directory.
-    * 
-    * @param argMap
-    *       map of command line argument key value pairs
-    * @param workingDir
-    *       working directory
-    * @param builderLoader 
-    *       loader for the builder (will look for definition in command line if this is null)
-    * @return
-    *       the cell network controller created by the factory
-    * @throws Exception
-    *       if error in creating cell network
-    */
-   public static HolonMatrix createMatrix(HashMap<String,String> argMap, File workingDir,  MatrixLoader builderLoader) 
-         throws Exception
-   {
-      // Check for valid working directory
-      if (!workingDir.exists()) 
-      {
-         throw new Exception(String.format(
-               "Working directory specified does not exist.",
-               workingDir.getAbsolutePath()
-               ));
-      }
-      else if (workingDir.isFile()) 
-      {
-         throw new Exception(String.format(
-               "Working directory %s cannot be a file.",
-               workingDir.getAbsolutePath()
-               ));
-      }
-      
-      // Load and instantiate the builder
-      System.out.println();
-      MatrixLoader loader = builderLoader;
-      if (loader == null || 
-            (argMap.containsKey(MatrixLoader.ARG_FILE_PATH) && 
-                  argMap.containsKey(MatrixLoader.ARG_CLASS_PATH))
-            )
-      {
-         loader = (MatrixLoader)MatrixLoader.createObjectInstance(
-               MatrixBuilder.class.getClassLoader(),
-               new File(argMap.get(MatrixLoader.ARG_FILE_PATH)),
-               argMap.get(MatrixLoader.ARG_CLASS_PATH),
-               "Matrix loader"
-               );
-      }
-      System.out.println(String.format(
-            "Using the matrix loader %s ...",
-            loader.getClass().getCanonicalName()
-            ));
-      MatrixBuilder builder = loader.createBuilder(argMap, workingDir);
-
-      // Create the matrix
-      HolonMatrix matrix = builder.createMatrix();
-      builder.getLogger().statusUpdate(String.format(
-            "Matrix build time = %s ...", 
-            BehaviorTime.parseTimeInMillis(System.currentTimeMillis() - builder.previousTime)
-            ));
-      builder.getLogger().statusUpdate("");
-      return matrix;
-   }
-   
-   /**
     * List of global behaviors
     */
    protected HashMap<String, Behavior> globalBehaviors;
-   
-   
+  
    /**
     * Constructor
     */
@@ -181,8 +92,37 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
       return boundary;
    }
 
+   /**
+    * Static method to build the matrix based on the initial configuration information in the xml
+    * file in the specified working directory.
+    * 
+    * @param argMap
+    *       map of command line argument key value pairs
+    * @param workingDir
+    *       working directory
+    * @param builderLoader 
+    *       loader for the builder (will look for definition in command line if this is null)
+    * @return
+    *       the cell network controller created by the factory
+    * @throws Exception
+    *       if error in creating cell network
+    */
+   @Override
+   public HolonMatrix newModel() throws Exception
+   {
+      // Build the matrix
+      HolonMatrix matrix = buildMatrix();
+      loggerManager.statusUpdate(String.format(
+            "Matrix build time = %s ...", 
+            BehaviorTime.parseTimeInMillis(System.currentTimeMillis() - previousTime)
+            ));
+      loggerManager.statusUpdate("");
+      
+      return matrix;
+   }
+   
    @Override 
-   public void build() throws Exception
+   public void buildModel() throws Exception
    {
       initializeBuildSources();
       loggerManager.statusUpdate("   Installing cells in matrix...");
@@ -235,6 +175,6 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
     *       Matrix object
     * @throws Exception 
     */
-   protected abstract HolonMatrix createMatrix() throws Exception;
+   protected abstract HolonMatrix buildMatrix() throws Exception;
 
 }

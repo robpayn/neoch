@@ -16,7 +16,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * XML document for configuration information for a NEO lite simulation
+ * XML document for configuration information for a NEOCH simulation
  * 
  * @author robpayn
  *

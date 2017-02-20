@@ -15,7 +15,7 @@ import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
  * @author robpayn
  *
  */
-public abstract class ControllerNEOAbstract extends ControllerTimeStep {
+public abstract class ControllerNEO extends ControllerTimeStep {
 
    /**
     * Main entry point.  Construct a NEO-CH matrix and processor and execute.
@@ -27,12 +27,13 @@ public abstract class ControllerNEOAbstract extends ControllerTimeStep {
    {
       try 
       {
-         HolonMatrix matrix = MatrixBuilder.createMatrix(
+         MatrixBuilder builder = MatrixLoader.loadBuilder(
                args, 
                new File(System.getProperty("user.dir")),
                null
                );
-         ControllerNEOAbstract controller = matrix.getController();
+         HolonMatrix matrix = builder.createModel();
+         ControllerNEO controller = matrix.getController();
          controller.initializeController();
          controller.executeController();
       } 
@@ -142,7 +143,7 @@ public abstract class ControllerNEOAbstract extends ControllerTimeStep {
    /**
     * Constructor
     */
-   public ControllerNEOAbstract()
+   public ControllerNEO()
    {
       initializers = new ArrayList<InitializerAutoSimple>();
       tradeUpdaters = new ArrayList<UpdaterAutoSimple>();
@@ -205,7 +206,7 @@ public abstract class ControllerNEOAbstract extends ControllerTimeStep {
       {
          throw new Exception("NEO controller requires a builder to create the matrix.");
       }
-      builder.build();
+      builder.buildModel();
    }
 
    /**

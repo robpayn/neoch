@@ -6,7 +6,7 @@ import org.payn.chsm.dependencies.DependencyHandlerInitialize;
 import org.payn.chsm.processors.interfaces.InitializerSimple;
 import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
 import org.payn.chsm.processors.interfaces.UpdaterSimple;
-import org.payn.neoch.ControllerNEOAbstract;
+import org.payn.neoch.ControllerNEO;
 import org.payn.neoch.dependencies.DependencyHandlerUpdateLoad;
 import org.payn.neoch.dependencies.DependencyHandlerUpdateState;
 import org.payn.neoch.dependencies.DependencyHandlerUpdateStorage;
@@ -18,7 +18,7 @@ import org.payn.neoch.dependencies.DependencyHandlerUpdateTrade;
  * @author v78h241
  *
  */
-public class ControllerNEOEuler extends ControllerNEOAbstract {
+public class ControllerNEOEuler extends ControllerNEO {
 
    /**
     * Set up dependencies for simple initializers

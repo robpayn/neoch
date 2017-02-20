@@ -3,7 +3,7 @@ package org.payn.neoch;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import org.payn.chsm.Holon;
+import org.payn.chsm.HolonAbstract;
 import org.payn.chsm.State;
 
 /**
@@ -12,7 +12,7 @@ import org.payn.chsm.State;
  * @author rob payn
  *
  */
-public class HolonMatrix extends Holon {
+public class HolonMatrix extends HolonAbstract {
    
    /**
     * Map of cells
@@ -68,9 +68,9 @@ public class HolonMatrix extends Holon {
     * @return
     *       Processor cast to NEO controller
     */
-   public ControllerNEOAbstract getController()
+   public ControllerNEO getController()
    {
-      return (ControllerNEOAbstract)processor;
+      return (ControllerNEO)processor;
    }
 
    /**

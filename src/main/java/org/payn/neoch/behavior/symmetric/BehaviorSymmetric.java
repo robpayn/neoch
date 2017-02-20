@@ -31,7 +31,7 @@ public abstract class BehaviorSymmetric extends BehaviorMatrix {
    }
    
    @Override
-   protected void installProcessor(Holon holon, Controller controller,
+   public void installProcessor(Holon holon, Controller controller,
          String stateName, Processor processor) throws Exception
    {
       super.installProcessor(holon, controller, stateName, processor);

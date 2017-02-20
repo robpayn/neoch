@@ -1,7 +1,7 @@
 package org.payn.neoch.behavior;
 
 
-import org.payn.chsm.Behavior;
+import org.payn.chsm.BehaviorAbstract;
 import org.payn.chsm.Processor;
 import org.payn.chsm.Value;
 
@@ -11,7 +11,7 @@ import org.payn.chsm.Value;
  * @author v78h241
  *
  */
-public abstract class BehaviorMatrix extends Behavior {
+public abstract class BehaviorMatrix extends BehaviorAbstract {
    
    /**
     * Add a processor for a symmetric behavior

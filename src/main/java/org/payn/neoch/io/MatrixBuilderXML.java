@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import org.payn.chsm.Behavior;
 import org.payn.chsm.Holon;
-import org.payn.chsm.OutputHandler;
 import org.payn.chsm.Resource;
 import org.payn.chsm.io.xml.ElementBehavior;
 import org.payn.chsm.io.xml.ElementHolon;
@@ -196,7 +195,7 @@ public class MatrixBuilderXML extends MatrixBuilder {
    }
 
    @Override
-   protected HolonMatrix createMatrix() throws Exception 
+   protected HolonMatrix buildMatrix() throws Exception 
    {
       // Check for valid configuration file
       if (!argMap.containsKey("config"))
@@ -247,13 +246,6 @@ public class MatrixBuilderXML extends MatrixBuilder {
       // Build the cells and boundaries in the matrix
       loggerManager.statusUpdate("Building the matrix...");
       holon.setProcessor(controller);
-      
-      // Initialize output handlers
-      loggerManager.statusUpdate("Initializing output handlers...");
-      for (OutputHandler outputHandler: controller.getOutputHandlers())
-      {
-         outputHandler.initialize(holon);
-      }
       
       return holon;
    }

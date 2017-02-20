@@ -6,7 +6,7 @@ import java.io.FileWriter;
 
 import org.payn.chsm.Processor;
 import org.payn.chsm.io.file.OutputHandlerFileSystem;
-import org.payn.neoch.ControllerNEOAbstract;
+import org.payn.neoch.ControllerNEO;
 
 /**
  * Output handler for debugging dependencies
@@ -41,7 +41,7 @@ public class OutputHandlerDependencies extends OutputHandlerFileSystem {
    @Override
    public void write() throws Exception 
    {
-      ControllerNEOAbstract controller = (ControllerNEOAbstract)source.getProcessor();
+      ControllerNEO controller = (ControllerNEO)source.getProcessor();
       if (iterationValue.n == 0)
       {
          File file = new File(

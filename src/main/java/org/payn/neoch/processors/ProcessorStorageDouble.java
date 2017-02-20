@@ -24,7 +24,7 @@ public class ProcessorStorageDouble extends ProcessorDouble implements UpdaterSt
    /**
     * List of loads used to update the storage
     */
-   private ArrayList<ValueDouble> loadValues;
+   protected ArrayList<ValueDouble> loadValues;
    
    /**
     * Time interval of the model
