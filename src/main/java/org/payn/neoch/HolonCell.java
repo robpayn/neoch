@@ -110,4 +110,17 @@ public class HolonCell extends HolonAbstract {
       }
    }
    
+   /**
+    * Get the boundary with the provided name
+    * 
+    * @param boundaryName
+    *       name of boundary to get
+    * @return
+    *       boundary object
+    */
+   public HolonBoundary getBoundary(String boundaryName)
+   {
+      return boundaries.get(boundaryName);
+   }
+   
 }
