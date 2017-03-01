@@ -19,7 +19,7 @@ import org.payn.neoch.behavior.BehaviorMatrix;
  * @author v78h241
  *
  */
-public class ProcessorStorageDouble extends ProcessorDouble implements UpdaterStorage {
+public class ProcessorDoubleStorage extends ProcessorDouble implements UpdaterStorage {
    
    /**
     * List of loads used to update the storage
@@ -34,7 +34,7 @@ public class ProcessorStorageDouble extends ProcessorDouble implements UpdaterSt
    /**
     * Raw constructor
     */
-   public ProcessorStorageDouble()
+   public ProcessorDoubleStorage()
    {
       loadValues = new ArrayList<ValueDouble>();
    }

@@ -9,7 +9,7 @@ import org.payn.neoch.UpdaterLoad;
  * @author robpayn
  *
  */
-public abstract class ProcessorLoadDouble 
+public abstract class ProcessorDoubleLoad 
 extends ProcessorDouble 
 implements UpdaterLoad {
 

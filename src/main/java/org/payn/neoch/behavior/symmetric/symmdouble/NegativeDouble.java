@@ -2,7 +2,7 @@ package org.payn.neoch.behavior.symmetric.symmdouble;
 
 import org.payn.chsm.values.ValueDouble;
 import org.payn.neoch.HolonBoundary;
-import org.payn.neoch.processors.ProcessorLoadDoubleInit;
+import org.payn.neoch.processors.ProcessorDoubleLoadInit;
 
 /**
  * A double precision floating point load for a negative behavior
@@ -10,7 +10,7 @@ import org.payn.neoch.processors.ProcessorLoadDoubleInit;
  * @author robpayn
  *
  */
-public class NegativeDouble extends ProcessorLoadDoubleInit {
+public class NegativeDouble extends ProcessorDoubleLoadInit {
    
    /**
     * Value of the adjacent load

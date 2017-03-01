@@ -154,9 +154,9 @@ public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
       {
          tradeProcessorCrankNicolsonUpdaters.add((UpdaterCrankNicolson)proc);
       }
-      else if (ProcessorLoadDouble.class.isInstance(proc))
+      else if (ProcessorDoubleLoad.class.isInstance(proc))
       {
-         tradeProcessorCrankNicolsonUpdaters.add(new UpdaterCrankNicolsonHelper((ProcessorLoadDouble)proc));
+         tradeProcessorCrankNicolsonUpdaters.add(new UpdaterCrankNicolsonHelper((ProcessorDoubleLoad)proc));
       }
    }
    

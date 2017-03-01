@@ -8,7 +8,7 @@ import org.payn.chsm.processors.interfaces.InitializerSimpleAuto;
  * @author v78h241
  *
  */
-public abstract class ProcessorStorageDoubleInit extends ProcessorStorageDouble 
+public abstract class ProcessorDoubleStorageInit extends ProcessorDoubleStorage 
 implements InitializerSimpleAuto {
 
 }

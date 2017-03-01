@@ -217,9 +217,9 @@ public class ControllerNEOBackEuler extends ControllerNEORKTwo {
       {
          storageProcessorToleranceUpdaters.add((UpdaterTolerance)proc);
       }
-      else if (ProcessorStorageDouble.class.isInstance(proc))
+      else if (ProcessorDoubleStorage.class.isInstance(proc))
       {
-         storageProcessorToleranceUpdaters.add(new UpdaterToleranceHelper((ProcessorStorageDouble)proc));
+         storageProcessorToleranceUpdaters.add(new UpdaterToleranceHelper((ProcessorDoubleStorage)proc));
       }
    }
 
