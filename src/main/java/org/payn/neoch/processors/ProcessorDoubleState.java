@@ -1,6 +1,6 @@
 package org.payn.neoch.processors;
 
-import org.payn.chsm.processors.ProcessorDouble;
+import org.payn.chsm.processors.auto.ProcessorDoubleSimple;
 import org.payn.neoch.UpdaterState;
 
 /**
@@ -9,6 +9,6 @@ import org.payn.neoch.UpdaterState;
  * @author robpayn
  *
  */
-public abstract class ProcessorDoubleState extends ProcessorDouble implements UpdaterState {
+public abstract class ProcessorDoubleState extends ProcessorDoubleSimple implements UpdaterState {
 
 }
