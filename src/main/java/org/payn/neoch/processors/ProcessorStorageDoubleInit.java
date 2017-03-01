@@ -1,6 +1,6 @@
 package org.payn.neoch.processors;
 
-import org.payn.chsm.processors.interfaces.InitializerAutoSimple;
+import org.payn.chsm.processors.interfaces.InitializerSimpleAuto;
 
 /**
  * A storage processor that is automatically initialized
@@ -9,6 +9,6 @@ import org.payn.chsm.processors.interfaces.InitializerAutoSimple;
  *
  */
 public abstract class ProcessorStorageDoubleInit extends ProcessorStorageDouble 
-implements InitializerAutoSimple {
+implements InitializerSimpleAuto {
 
 }

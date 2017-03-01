@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import org.payn.chsm.Processor;
 import org.payn.chsm.State;
 import org.payn.chsm.processors.ControllerTimeStep;
-import org.payn.chsm.processors.interfaces.InitializerAutoSimple;
-import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
+import org.payn.chsm.processors.interfaces.InitializerSimpleAuto;
+import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
 
 /**
  * Controller for a NEO-CH simulation
@@ -46,7 +46,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    /**
     * List of initializing processors
     */
-   protected ArrayList<InitializerAutoSimple> initializers;
+   protected ArrayList<InitializerSimpleAuto> initializers;
    
    /**
     * Getter
@@ -54,7 +54,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
     * @return
     *       unsorted list of initializing processors
     */
-   public ArrayList<InitializerAutoSimple> getInitializers() 
+   public ArrayList<InitializerSimpleAuto> getInitializers() 
    {
       return initializers;
    }
@@ -62,7 +62,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    /**
     * List of updaters for the trade phase
     */
-   protected ArrayList<UpdaterAutoSimple> tradeUpdaters;
+   protected ArrayList<UpdaterSimpleAuto> tradeUpdaters;
    
    /**
     * Getter
@@ -70,7 +70,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
     * @return
     *       list of trade updaters
     */
-   public ArrayList<UpdaterAutoSimple> getTradeUpdaters() 
+   public ArrayList<UpdaterSimpleAuto> getTradeUpdaters() 
    {
       return tradeUpdaters;
    }
@@ -78,7 +78,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    /**
     * List of updaters for the load phase
     */
-   protected ArrayList<UpdaterAutoSimple> loadUpdaters;
+   protected ArrayList<UpdaterSimpleAuto> loadUpdaters;
    
    /**
     * Getter
@@ -86,7 +86,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
     * @return
     *       list of load updaters
     */
-   public ArrayList<UpdaterAutoSimple> getLoadUpdaters() 
+   public ArrayList<UpdaterSimpleAuto> getLoadUpdaters() 
    {
       return loadUpdaters;
    }
@@ -94,7 +94,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    /**
     * List of updaters for the storage phase
     */
-   protected ArrayList<UpdaterAutoSimple> storageUpdaters;
+   protected ArrayList<UpdaterSimpleAuto> storageUpdaters;
 
    /**
     * Getter
@@ -102,7 +102,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
     * @return
     *       list of storage updaters
     */
-   public ArrayList<UpdaterAutoSimple> getStorageUpdaters() 
+   public ArrayList<UpdaterSimpleAuto> getStorageUpdaters() 
    {
       return storageUpdaters;
    }
@@ -110,7 +110,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    /**
     * List of updaters for the update phase
     */
-   protected ArrayList<UpdaterAutoSimple> stateUpdaters;
+   protected ArrayList<UpdaterSimpleAuto> stateUpdaters;
    
    /**
     * Getter
@@ -118,7 +118,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
     * @return
     *       list of storage updaters
     */
-   public ArrayList<UpdaterAutoSimple> getStateUpdaters() 
+   public ArrayList<UpdaterSimpleAuto> getStateUpdaters() 
    {
       return stateUpdaters;
    }
@@ -126,7 +126,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    /**
     * List of updaters for the update phase
     */
-   protected ArrayList<UpdaterAutoSimple> infoUpdaters;
+   protected ArrayList<UpdaterSimpleAuto> infoUpdaters;
    
    /**
     * Getter
@@ -134,7 +134,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
     * @return
     *       list of storage updaters
     */
-   public ArrayList<UpdaterAutoSimple> getInfoUpdaters() 
+   public ArrayList<UpdaterSimpleAuto> getInfoUpdaters() 
    {
       return infoUpdaters;
    }
@@ -145,12 +145,12 @@ public abstract class ControllerNEO extends ControllerTimeStep {
     */
    public ControllerNEO()
    {
-      initializers = new ArrayList<InitializerAutoSimple>();
-      tradeUpdaters = new ArrayList<UpdaterAutoSimple>();
-      loadUpdaters = new ArrayList<UpdaterAutoSimple>();
-      storageUpdaters = new ArrayList<UpdaterAutoSimple>();
-      stateUpdaters = new ArrayList<UpdaterAutoSimple>();
-      infoUpdaters = new ArrayList<UpdaterAutoSimple>();
+      initializers = new ArrayList<InitializerSimpleAuto>();
+      tradeUpdaters = new ArrayList<UpdaterSimpleAuto>();
+      loadUpdaters = new ArrayList<UpdaterSimpleAuto>();
+      storageUpdaters = new ArrayList<UpdaterSimpleAuto>();
+      stateUpdaters = new ArrayList<UpdaterSimpleAuto>();
+      infoUpdaters = new ArrayList<UpdaterSimpleAuto>();
    }
    
    /**
@@ -224,9 +224,9 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    @Override
    public void addProcessor(Processor processor) throws Exception 
    {
-      if (InitializerAutoSimple.class.isInstance(processor))
+      if (InitializerSimpleAuto.class.isInstance(processor))
       {
-         initializers.add((InitializerAutoSimple)processor);
+         initializers.add((InitializerSimpleAuto)processor);
       }
       
       if (UpdaterTrade.class.isInstance(processor))
@@ -243,11 +243,11 @@ public abstract class ControllerNEO extends ControllerTimeStep {
       }
       else if (UpdaterState.class.isInstance(processor))
       {
-         stateUpdaters.add((UpdaterAutoSimple)processor);
+         stateUpdaters.add((UpdaterSimpleAuto)processor);
       }
       else if (UpdaterInfo.class.isInstance(processor))
       {
-         infoUpdaters.add((UpdaterAutoSimple)processor);
+         infoUpdaters.add((UpdaterSimpleAuto)processor);
       }
    }
    

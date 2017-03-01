@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.payn.chsm.dependencies.DependencyHandlerInitialize;
 import org.payn.chsm.processors.interfaces.InitializerSimple;
-import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
+import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
 import org.payn.chsm.processors.interfaces.UpdaterSimple;
 import org.payn.neoch.ControllerNEO;
 import org.payn.neoch.dependencies.DependencyHandlerUpdateLoad;
@@ -103,7 +103,7 @@ public class ControllerNEOEuler extends ControllerNEO {
     * @throws Exception
     *       if error in update
     */
-   protected void update(ArrayList<UpdaterAutoSimple> updaters) throws Exception 
+   protected void update(ArrayList<UpdaterSimpleAuto> updaters) throws Exception 
    {
       for (UpdaterSimple updater: updaters)
       {

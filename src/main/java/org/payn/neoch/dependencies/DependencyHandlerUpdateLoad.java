@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.payn.chsm.Processor;
 import org.payn.chsm.dependencies.DependencyHandlerUpdate;
-import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
+import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
 import org.payn.neoch.UpdaterLoad;
 
 /**
@@ -21,7 +21,7 @@ public class DependencyHandlerUpdateLoad extends DependencyHandlerUpdate {
     * @param updaters
     *       list of updaters
     */
-   public DependencyHandlerUpdateLoad(ArrayList<UpdaterAutoSimple> updaters) 
+   public DependencyHandlerUpdateLoad(ArrayList<UpdaterSimpleAuto> updaters) 
    {
       super(updaters);
    }

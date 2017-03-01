@@ -1,6 +1,6 @@
 package org.payn.neoch;
 
-import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
+import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
 
 /**
  * Updater for the state phase
@@ -8,6 +8,6 @@ import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
  * @author robpayn
  *
  */
-public interface UpdaterState extends UpdaterAutoSimple {
+public interface UpdaterState extends UpdaterSimpleAuto {
 
 }

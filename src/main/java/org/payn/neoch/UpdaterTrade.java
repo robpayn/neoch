@@ -1,6 +1,6 @@
 package org.payn.neoch;
 
-import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
+import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
 
 /**
  * An updater for the trade phase
@@ -8,6 +8,6 @@ import org.payn.chsm.processors.interfaces.UpdaterAutoSimple;
  * @author rob payn
  *
  */
-public interface UpdaterTrade extends UpdaterAutoSimple {
+public interface UpdaterTrade extends UpdaterSimpleAuto {
 
 }
