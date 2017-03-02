@@ -1,13 +1,16 @@
 package org.payn.neoch.processors;
 
 /**
- * Load processor for which initialization is required
+ * Convenience abstraction for a symmetric load that will throw an error
+ * if no initial value is provided
  * 
  * @author v78h241
  *
  */
-public abstract class ProcessorDoubleLoadInitRequired extends ProcessorDoubleLoadInit {
 
+public abstract class ProcessorDoubleLoadSymmetricInitRequired 
+extends ProcessorDoubleLoadSymmetricInit {
+   
    @Override
    public void initialize() throws Exception 
    {

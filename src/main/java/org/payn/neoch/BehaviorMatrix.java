@@ -1,4 +1,4 @@
-package org.payn.neoch.behavior;
+package org.payn.neoch;
 
 
 import org.payn.chsm.BehaviorAbstract;

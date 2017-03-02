@@ -2,7 +2,7 @@ package org.payn.neoch.io.xmltools;
 
 import org.payn.chsm.Behavior;
 import org.payn.chsm.io.xml.ElementBehavior;
-import org.payn.neoch.behavior.BehaviorMatrix;
+import org.payn.neoch.BehaviorMatrix;
 import org.w3c.dom.Element;
 
 /**

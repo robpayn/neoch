@@ -7,7 +7,6 @@ import org.payn.chsm.HolonAbstract;
 import org.payn.chsm.Resource;
 import org.payn.chsm.State;
 import org.payn.chsm.values.ValueStateMap;
-import org.payn.neoch.behavior.BehaviorMatrix;
 
 /**
  * A cell in a NEO lite matrix

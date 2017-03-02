@@ -9,5 +9,4 @@ import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
  *
  */
 public interface UpdaterLoad extends UpdaterSimpleAuto {
-
 }

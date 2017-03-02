@@ -7,7 +7,6 @@ import org.payn.chsm.HolonAbstract;
 import org.payn.chsm.Resource;
 import org.payn.chsm.State;
 import org.payn.chsm.values.ValueStateMap;
-import org.payn.neoch.behavior.BehaviorMatrix;
 
 /**
  * Controls a boundary to a cell, can be an external boundary linked to an adjacent boundary.
@@ -124,6 +123,17 @@ public class HolonBoundary extends HolonAbstract {
             loads.put(resource, list);
          }
       }
+   }
+
+   /**
+    * Determine if there is an adjacent boundary
+    * 
+    * @return
+    *       true if there is an adjacent boundary, false otherwise
+    */
+   public boolean hasAdjacentBoundary() 
+   {
+      return this.adjBoundary != null;
    }
 
 }
