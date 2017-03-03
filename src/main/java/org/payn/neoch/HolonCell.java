@@ -105,7 +105,7 @@ public class HolonCell extends HolonAbstract {
    {
       if (UpdaterStorage.class.isInstance(state.getProcessor()))
       {
-         storages.put(((BehaviorMatrix)state.getBehavior()).getResource(), state);
+         storages.put(state.getBehavior().getResource(), state);
       }
    }
    

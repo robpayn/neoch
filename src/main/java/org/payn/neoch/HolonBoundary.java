@@ -111,7 +111,7 @@ public class HolonBoundary extends HolonAbstract {
    {
       if (UpdaterLoad.class.isInstance(state.getProcessor()))
       {
-         Resource resource = ((BehaviorMatrix)state.getBehavior()).getResource();
+         Resource resource = state.getBehavior().getResource();
          if (loads.containsKey(resource))
          {
             loads.get(resource).add(state);
