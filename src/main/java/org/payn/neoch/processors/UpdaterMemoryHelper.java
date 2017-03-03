@@ -9,14 +9,15 @@ import org.payn.neoch.processors.interfaces.UpdaterMemory;
  * states that need memory.
  * 
  * @author v78h241
+ * @param <PT> 
  *
  */
-public class UpdaterMemoryHelper implements UpdaterMemory {
+public class UpdaterMemoryHelper<PT extends ProcessorDouble> implements UpdaterMemory {
    
    /**
     * Processor decorated by this updater
     */
-   protected ProcessorDouble processor;
+   protected PT processor;
    
    /**
     * Saved value of the processor's value
@@ -34,7 +35,7 @@ public class UpdaterMemoryHelper implements UpdaterMemory {
     * @param proc
     *       processor to be decorated
     */
-   public UpdaterMemoryHelper(ProcessorDouble proc)
+   public UpdaterMemoryHelper(PT proc)
    {
       this.processor = proc;
       this.value = proc.getValue();

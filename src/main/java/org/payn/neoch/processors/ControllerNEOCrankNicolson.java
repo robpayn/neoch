@@ -17,7 +17,7 @@ public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
    /**
     * List of trade processors to be updated by the crank nicolson updaters
     */
-   protected ArrayList<UpdaterCrankNicolson> tradeProcessorCrankNicolsonUpdaters;
+   protected ArrayList<UpdaterCrankNicolson> loadProcessorCrankNicolsonUpdaters;
    
    /**
     * Constructor
@@ -25,7 +25,7 @@ public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
    public ControllerNEOCrankNicolson()
    {
       super();
-      tradeProcessorCrankNicolsonUpdaters = new ArrayList<UpdaterCrankNicolson>();
+      loadProcessorCrankNicolsonUpdaters = new ArrayList<UpdaterCrankNicolson>();
    }
    
    @Override
@@ -80,8 +80,7 @@ public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
             
             // estimate Crank Nicolson loads based on new state estimate
             update(tradeUpdaters);
-            update(loadUpdaters);
-            updateTradeCrankNicolson();
+            updateLoadsCrankNicolson();
             
             // restore initial state
             restoreStore();
@@ -117,9 +116,9 @@ public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
     * 
     * @throws Exception
     */
-   protected void updateTradeCrankNicolson() throws Exception 
+   protected void updateLoadsCrankNicolson() throws Exception 
    {
-      for (UpdaterCrankNicolson updater: tradeProcessorCrankNicolsonUpdaters)
+      for (UpdaterCrankNicolson updater: loadProcessorCrankNicolsonUpdaters)
       {
          updater.updateCrankNicolson();
       }      
@@ -130,7 +129,7 @@ public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
     */
    protected void saveLoads() 
    {
-      for (UpdaterCrankNicolson updater: tradeProcessorCrankNicolsonUpdaters)
+      for (UpdaterCrankNicolson updater: loadProcessorCrankNicolsonUpdaters)
       {
          updater.saveNumber();
       }      
@@ -152,11 +151,11 @@ public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
    {
       if (UpdaterLoad.class.isInstance(proc) && UpdaterCrankNicolson.class.isInstance(proc))
       {
-         tradeProcessorCrankNicolsonUpdaters.add((UpdaterCrankNicolson)proc);
+         loadProcessorCrankNicolsonUpdaters.add((UpdaterCrankNicolson)proc);
       }
       else if (ProcessorDoubleLoad.class.isInstance(proc))
       {
-         tradeProcessorCrankNicolsonUpdaters.add(new UpdaterCrankNicolsonHelper((ProcessorDoubleLoad)proc));
+         loadProcessorCrankNicolsonUpdaters.add(new UpdaterCrankNicolsonHelper((ProcessorDoubleLoad)proc));
       }
    }
    

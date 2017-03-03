@@ -26,9 +26,9 @@ public abstract class ProcessorDoubleLoadSymmetric extends ProcessorDoubleLoad {
    }
    
    @Override
-   public void update() throws Exception
+   public void updateStorageProcessor() throws Exception
    {
-      super.update();
+      super.updateStorageProcessor();
       storageProcessorAdjacent.decrementNetLoad(value.n);
    }
 

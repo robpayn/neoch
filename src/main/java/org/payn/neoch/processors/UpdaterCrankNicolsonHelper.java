@@ -1,6 +1,5 @@
 package org.payn.neoch.processors;
 
-import org.payn.chsm.processors.ProcessorDouble;
 import org.payn.neoch.processors.interfaces.UpdaterCrankNicolson;
 
 /**
@@ -9,7 +8,8 @@ import org.payn.neoch.processors.interfaces.UpdaterCrankNicolson;
  * @author v78h241
  *
  */
-public class UpdaterCrankNicolsonHelper extends UpdaterMemoryHelper implements UpdaterCrankNicolson {
+public class UpdaterCrankNicolsonHelper extends UpdaterMemoryHelper<ProcessorDoubleLoad> 
+implements UpdaterCrankNicolson {
 
    /**
     * Construct a new instance decorating the provided processor
@@ -17,7 +17,7 @@ public class UpdaterCrankNicolsonHelper extends UpdaterMemoryHelper implements U
     * @param proc
     *       processor to be decorated
     */
-   public UpdaterCrankNicolsonHelper(ProcessorDouble proc) 
+   public UpdaterCrankNicolsonHelper(ProcessorDoubleLoad proc) 
    {
       super(proc);
    }
@@ -25,7 +25,9 @@ public class UpdaterCrankNicolsonHelper extends UpdaterMemoryHelper implements U
    @Override
    public void updateCrankNicolson() throws Exception 
    {
+      processor.updateLoad();
       value.n = 0.5 * (value.n + savedValue);
+      processor.updateStorageProcessor();
    }
 
 }

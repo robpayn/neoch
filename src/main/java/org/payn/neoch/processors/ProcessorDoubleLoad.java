@@ -32,19 +32,18 @@ implements UpdaterLoad {
    public void update() throws Exception
    {
       updateLoad();
-      storageProcessor.incrementNetLoad(value.n);
+      updateStorageProcessor();
    }
 
    /**
-    * Set the update dependencies for the load
-    */
-   protected abstract void setUpdateDependenciesLoad() throws Exception;
-
-   /**
-    * Update the load value
+    * Update the storage processor net load
     * 
     * @throws Exception
     */
-   protected abstract void updateLoad() throws Exception;
+   @Override
+   public void updateStorageProcessor() throws Exception 
+   {
+      storageProcessor.incrementNetLoad(value.n);
+   }
 
 }

@@ -139,7 +139,9 @@ public class ControllerNEORKTwo extends ControllerNEOEuler {
       else if (ProcessorDoubleStorage.class.isInstance(processor) || 
             ProcessorDoubleState.class.isInstance(processor))
       {
-         storeProcessorMemoryUpdaters.add(new UpdaterMemoryHelper((ProcessorDouble)processor));
+         storeProcessorMemoryUpdaters.add(
+               new UpdaterMemoryHelper<ProcessorDouble>((ProcessorDouble)processor)
+               );
       }
    }
 
