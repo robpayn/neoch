@@ -17,7 +17,7 @@ implements UpdaterLoad {
    /**
     * The storage processor to increment with this load
     */
-   private ProcessorDoubleStorage storageProcessor;
+   protected ProcessorDoubleStorage storageProcessor;
 
    @Override
    public void setUpdateDependencies() throws Exception

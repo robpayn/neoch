@@ -158,6 +158,13 @@ public class MatrixLoaderXML extends MatrixLoader {
          if (resourceElem.isActive())
          {
             Resource resource = getResource(resourceElem);
+            if (resource == null)
+            {
+               throw new Exception(String.format(
+                     "Configured resource %s could not be loaded.", 
+                     resourceElem.getName()
+                     ));
+            }
             resource.initialize(resourceElem.getName());
             list.add(resource);
          }
