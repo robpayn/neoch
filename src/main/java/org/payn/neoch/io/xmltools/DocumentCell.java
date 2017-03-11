@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.payn.chsm.io.xml.ElementHolon;
-import org.payn.chsm.io.xml.XMLDocument;
+import org.payn.chsm.io.xmltools.ElementHolon;
+import org.payn.chsm.io.xmltools.XMLDocument;
 import org.payn.neoch.HolonCell;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

@@ -1,12 +1,12 @@
-package org.payn.neoch.io;
+package org.payn.neoch.io.reporters;
 
 import java.io.File;
 import java.util.HashMap;
 
 import org.payn.chsm.Holon;
 import org.payn.chsm.ModelLoaderXML;
-import org.payn.chsm.io.file.ReporterSingleThread;
-import org.payn.chsm.io.xml.XMLDocumentModelConfig;
+import org.payn.chsm.io.reporters.ReporterSingleThread;
+import org.payn.chsm.io.xmltools.XMLDocumentModelConfig;
 import org.payn.neoch.HolonMatrix;
 import org.payn.neoch.MatrixBuilderXML;
 import org.payn.neoch.io.xmltools.DocumentBoundary;

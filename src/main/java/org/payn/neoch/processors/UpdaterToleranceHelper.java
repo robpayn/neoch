@@ -24,7 +24,7 @@ public class UpdaterToleranceHelper implements UpdaterTolerance {
    /**
     * Controller tracking the results of the tolerance check
     */
-   protected ControllerNEOBackEuler controller;
+   protected ControllerNEOCHBackEuler controller;
    
    /**
     * Decorated processor
@@ -41,7 +41,7 @@ public class UpdaterToleranceHelper implements UpdaterTolerance {
    {
       this.proc = proc;
       value = proc.getValue();
-      controller = (ControllerNEOBackEuler)proc.getController();
+      controller = (ControllerNEOCHBackEuler)proc.getController();
    }
 
    @Override
@@ -56,7 +56,7 @@ public class UpdaterToleranceHelper implements UpdaterTolerance {
       double error = Math.abs(value.n - lastEstimate);
       if (error > controller.getDefaultTolerance())
       {
-         ((ControllerNEOBackEuler)controller).convergenceFailed();
+         ((ControllerNEOCHBackEuler)controller).convergenceFailed();
       }
    }
 

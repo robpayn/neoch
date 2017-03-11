@@ -17,7 +17,7 @@ import org.payn.neoch.processors.interfaces.UpdaterMemory;
  * @author v78h241
  *
  */
-public class ControllerNEORKTwo extends ControllerNEOEuler {
+public class ControllerNEOCHRKTwo extends ControllerNEOCHEuler {
 
    /**
     * Value for the time interval
@@ -32,7 +32,7 @@ public class ControllerNEORKTwo extends ControllerNEOEuler {
    /**
     * Constructor
     */
-   public ControllerNEORKTwo()
+   public ControllerNEOCHRKTwo()
    {
       super();
       storeProcessorMemoryUpdaters = new ArrayList<UpdaterMemory>();

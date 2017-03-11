@@ -1,6 +1,6 @@
 package org.payn.neoch.io.xmltools;
 
-import org.payn.chsm.io.xml.ElementHolon;
+import org.payn.chsm.io.xmltools.ElementHolon;
 import org.w3c.dom.Element;
 
 /**

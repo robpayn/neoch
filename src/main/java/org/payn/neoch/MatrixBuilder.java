@@ -157,9 +157,9 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
    }
 
    @Override
-   public ControllerNEO getController()
+   public ControllerNEOCH getController()
    {
-      return (ControllerNEO)controller;
+      return (ControllerNEOCH)controller;
    }
 
    /**

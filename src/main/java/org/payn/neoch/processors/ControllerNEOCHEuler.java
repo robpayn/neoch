@@ -6,7 +6,7 @@ import org.payn.chsm.processors.interfaces.InitializerSimple;
 import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
 import org.payn.chsm.sorters.SorterInitialize;
 import org.payn.chsm.processors.interfaces.UpdaterSimple;
-import org.payn.neoch.ControllerNEO;
+import org.payn.neoch.ControllerNEOCH;
 import org.payn.neoch.sorters.SorterUpdateLoad;
 import org.payn.neoch.sorters.SorterUpdateState;
 import org.payn.neoch.sorters.SorterUpdateStorage;
@@ -18,7 +18,7 @@ import org.payn.neoch.sorters.SorterUpdateTrade;
  * @author v78h241
  *
  */
-public class ControllerNEOEuler extends ControllerNEO {
+public class ControllerNEOCHEuler extends ControllerNEOCH {
 
    /**
     * Set up dependencies for simple initializers

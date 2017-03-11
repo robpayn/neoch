@@ -1,4 +1,4 @@
-package org.payn.neoch.io;
+package org.payn.neoch.io.reporters;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -6,8 +6,8 @@ import java.io.FileWriter;
 import java.util.HashMap;
 
 import org.payn.chsm.Processor;
-import org.payn.chsm.io.file.ReporterFileSystem;
-import org.payn.neoch.ControllerNEO;
+import org.payn.chsm.io.reporters.ReporterFileSystem;
+import org.payn.neoch.ControllerNEOCH;
 
 /**
  * Reporter for debugging dependencies
@@ -55,7 +55,7 @@ public class ReporterDependencies extends ReporterFileSystem {
    @Override
    public void write() throws Exception 
    {
-      ControllerNEO controller = (ControllerNEO)source.getProcessor();
+      ControllerNEOCH controller = (ControllerNEOCH)source.getProcessor();
       if (iterationValue.n == 0)
       {
          File file = new File(

@@ -69,9 +69,9 @@ public class HolonMatrix extends HolonAbstract {
     * @return
     *       Processor cast to NEO controller
     */
-   public ControllerNEO getController()
+   public ControllerNEOCH getController()
    {
-      return (ControllerNEO)processor;
+      return (ControllerNEOCH)processor;
    }
 
    /**

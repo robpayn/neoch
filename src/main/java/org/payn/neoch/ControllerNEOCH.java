@@ -13,7 +13,7 @@ import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
  * @author robpayn
  *
  */
-public abstract class ControllerNEO extends ControllerTimeStep {
+public abstract class ControllerNEOCH extends ControllerTimeStep {
 
    /**
     * List of initializing processors
@@ -115,7 +115,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    /**
     * Constructor
     */
-   public ControllerNEO()
+   public ControllerNEOCH()
    {
       initializers = new ArrayList<InitializerSimpleAuto>();
       tradeUpdaters = new ArrayList<UpdaterSimpleAuto>();

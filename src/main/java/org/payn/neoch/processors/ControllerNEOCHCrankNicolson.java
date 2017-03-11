@@ -12,7 +12,7 @@ import org.payn.neoch.processors.interfaces.UpdaterCrankNicolson;
  * @author robpayn
  *
  */
-public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
+public class ControllerNEOCHCrankNicolson extends ControllerNEOCHBackEuler {
 
    /**
     * List of trade processors to be updated by the crank nicolson updaters
@@ -22,7 +22,7 @@ public class ControllerNEOCrankNicolson extends ControllerNEOBackEuler {
    /**
     * Constructor
     */
-   public ControllerNEOCrankNicolson()
+   public ControllerNEOCHCrankNicolson()
    {
       super();
       loadProcessorCrankNicolsonUpdaters = new ArrayList<UpdaterCrankNicolson>();

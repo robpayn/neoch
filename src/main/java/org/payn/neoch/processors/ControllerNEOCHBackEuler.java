@@ -12,7 +12,7 @@ import org.payn.neoch.processors.interfaces.UpdaterTolerance;
  * @author v78h241
  *
  */
-public class ControllerNEOBackEuler extends ControllerNEORKTwo {
+public class ControllerNEOCHBackEuler extends ControllerNEOCHRKTwo {
 
    /**
     * Flag indicating if fixed point iteration has converged
@@ -68,7 +68,7 @@ public class ControllerNEOBackEuler extends ControllerNEORKTwo {
    /**
     * Constructor
     */
-   public ControllerNEOBackEuler()
+   public ControllerNEOCHBackEuler()
    {
       super();
       storageProcessorToleranceUpdaters = new ArrayList<UpdaterTolerance>();

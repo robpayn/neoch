@@ -2,7 +2,7 @@ package org.payn.neoch.io.xmltools;
 
 import java.io.File;
 
-import org.payn.chsm.io.xml.ElementXMLInput;
+import org.payn.chsm.io.xmltools.ElementXMLInput;
 import org.w3c.dom.Element;
 
 /**

@@ -1,10 +1,10 @@
-package org.payn.neoch.io;
+package org.payn.neoch.io.reporters;
 
 import java.io.File;
 import java.util.HashMap;
 
-import org.payn.chsm.io.ReporterFactoryXML;
-import org.payn.chsm.io.file.ReporterFileSystemFactoryXML;
+import org.payn.chsm.ReporterFactoryXML;
+import org.payn.chsm.io.reporters.ReporterFileSystemFactoryXML;
 
 /**
  * Factory for dependencies reporter
