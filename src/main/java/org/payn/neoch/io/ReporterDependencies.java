@@ -3,19 +3,33 @@ package org.payn.neoch.io;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.HashMap;
 
 import org.payn.chsm.Processor;
 import org.payn.chsm.io.file.ReporterFileSystem;
 import org.payn.neoch.ControllerNEO;
 
 /**
- * Output handler for debugging dependencies
+ * Reporter for debugging dependencies
  * 
  * @author robpayn
  *
  */
 public class ReporterDependencies extends ReporterFileSystem {
    
+   /**
+    * Construct a new instance using the provided working directory
+    * and argument map
+    * 
+    * @param workingDir
+    * @param argMap
+    */
+   public ReporterDependencies(File workingDir,
+         HashMap<String, String> argMap) 
+   {
+      super(workingDir, argMap);
+   }
+
    /**
     * No operations necessary to open location
     */

@@ -1,6 +1,7 @@
 package org.payn.neoch.io;
 
 import java.io.File;
+import java.util.HashMap;
 
 import org.payn.chsm.Holon;
 import org.payn.chsm.ModelLoaderXML;
@@ -12,9 +13,9 @@ import org.payn.neoch.io.xmltools.DocumentBoundary;
 import org.payn.neoch.io.xmltools.DocumentCell;
 
 /**
- * Output handler that creates serializable XML output for the XML builder
+ * Reporter that creates serializable XML output for the XML builder
  * 
- * This output handler is only compatible with derivatives of the MatrixBuilderXML matrix builder
+ * This reporter is only compatible with derivatives of the MatrixBuilderXML matrix builder
  * 
  * @author robpayn
  *
@@ -45,6 +46,18 @@ public class ReporterXMLSerial extends ReporterSingleThread {
     * Buffered iteration count
     */
    private long iteration;
+
+   /**
+    * Construct a new instance with the provided working directory and
+    * argument map
+    * 
+    * @param workingDir
+    * @param argMap
+    */
+   public ReporterXMLSerial(File workingDir, HashMap<String, String> argMap) 
+   {
+      super(workingDir, argMap);
+   }
 
    @Override
    public void initialize(Holon holon) throws Exception
