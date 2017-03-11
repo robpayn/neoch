@@ -2,15 +2,15 @@ package org.payn.neoch.processors;
 
 import java.util.ArrayList;
 
-import org.payn.chsm.dependencies.DependencyHandlerInitialize;
 import org.payn.chsm.processors.interfaces.InitializerSimple;
 import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
+import org.payn.chsm.sorters.SorterInitialize;
 import org.payn.chsm.processors.interfaces.UpdaterSimple;
 import org.payn.neoch.ControllerNEO;
-import org.payn.neoch.dependencies.DependencyHandlerUpdateLoad;
-import org.payn.neoch.dependencies.DependencyHandlerUpdateState;
-import org.payn.neoch.dependencies.DependencyHandlerUpdateStorage;
-import org.payn.neoch.dependencies.DependencyHandlerUpdateTrade;
+import org.payn.neoch.sorters.SorterUpdateLoad;
+import org.payn.neoch.sorters.SorterUpdateState;
+import org.payn.neoch.sorters.SorterUpdateStorage;
+import org.payn.neoch.sorters.SorterUpdateTrade;
 
 /**
  * A controller for a basic Eulerian single step calculation
@@ -26,9 +26,9 @@ public class ControllerNEOEuler extends ControllerNEO {
    @Override
    public void handleInitializationDependencies() throws Exception 
    {
-      DependencyHandlerInitialize dependencyHandler = new DependencyHandlerInitialize(initializers);
-      this.dependencyHandler = dependencyHandler;
-      initializers = dependencyHandler.getSortedProcessors();
+      SorterInitialize sorter = new SorterInitialize(initializers);
+      this.sorter = sorter;
+      initializers = sorter.getSortedProcessors();
    }
 
    /**
@@ -49,26 +49,26 @@ public class ControllerNEOEuler extends ControllerNEO {
    @Override
    public void handleExecutionDependencies() throws Exception 
    {
-      DependencyHandlerUpdateTrade dependencyHandlerTrade = new DependencyHandlerUpdateTrade(tradeUpdaters);
-      DependencyHandlerUpdateLoad dependencyHandlerLoad = new DependencyHandlerUpdateLoad(loadUpdaters);
-      DependencyHandlerUpdateStorage dependencyHandlerStorage = new DependencyHandlerUpdateStorage(storageUpdaters);
-      DependencyHandlerUpdateState dependencyHandlerUpdate = new DependencyHandlerUpdateState(stateUpdaters);
-      DependencyHandlerUpdateState dependencyHandlerInfo = new DependencyHandlerUpdateState(infoUpdaters);
+      SorterUpdateTrade sorterTrade = new SorterUpdateTrade(tradeUpdaters);
+      SorterUpdateLoad sorterLoad = new SorterUpdateLoad(loadUpdaters);
+      SorterUpdateStorage sorterStorage = new SorterUpdateStorage(storageUpdaters);
+      SorterUpdateState sorterUpdate = new SorterUpdateState(stateUpdaters);
+      SorterUpdateState sorterInfo = new SorterUpdateState(infoUpdaters);
       
-      this.dependencyHandler = dependencyHandlerTrade;
-      tradeUpdaters = dependencyHandlerTrade.getSortedProcessors();
+      this.sorter = sorterTrade;
+      tradeUpdaters = sorterTrade.getSortedProcessors();
       
-      this.dependencyHandler = dependencyHandlerLoad;
-      loadUpdaters = dependencyHandlerLoad.getSortedProcessors();
+      this.sorter = sorterLoad;
+      loadUpdaters = sorterLoad.getSortedProcessors();
       
-      this.dependencyHandler = dependencyHandlerStorage;
-      storageUpdaters = dependencyHandlerStorage.getSortedProcessors();
+      this.sorter = sorterStorage;
+      storageUpdaters = sorterStorage.getSortedProcessors();
       
-      this.dependencyHandler = dependencyHandlerUpdate;
-      stateUpdaters = dependencyHandlerUpdate.getSortedProcessors();
+      this.sorter = sorterUpdate;
+      stateUpdaters = sorterUpdate.getSortedProcessors();
 
-      this.dependencyHandler = dependencyHandlerInfo;
-      infoUpdaters = dependencyHandlerInfo.getSortedProcessors();
+      this.sorter = sorterInfo;
+      infoUpdaters = sorterInfo.getSortedProcessors();
    }
 
    /**

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.payn.chsm.io.xml.ElementHolon;
 import org.payn.chsm.io.xml.XMLDocument;
 import org.payn.neoch.HolonCell;
 import org.w3c.dom.Element;
@@ -17,8 +18,13 @@ import org.w3c.dom.NodeList;
  * @author rob payn
  *
  */
-public class DocumentCell extends XMLDocument implements Iterable<ElementHolonMatrix> {
+public class DocumentCell extends XMLDocument implements Iterable<ElementHolon> {
    
+   /**
+    * XML tag name for a cell holon element
+    */
+   public static final String TAG_NAME_CELL = "cell";
+
    /**
     * Raw constructor
     * 
@@ -63,7 +69,7 @@ public class DocumentCell extends XMLDocument implements Iterable<ElementHolonMa
    {
       for (HolonCell cell: cells.values())
       {
-         ElementHolonMatrix cellElement = createCellElement(cell.getName());
+         ElementHolon cellElement = createCellElement(cell.getName());
          cellElement.createBehaviorElements(cell);
       }
    }
@@ -76,10 +82,10 @@ public class DocumentCell extends XMLDocument implements Iterable<ElementHolonMa
     * @return
     *       cell element
     */
-   public ElementHolonMatrix createCellElement(String name) 
+   public ElementHolon createCellElement(String name) 
    {
-      ElementHolonMatrix cellElement = new ElementHolonMatrix(
-            document.createElement(ElementHolonMatrix.TAG_NAME_CELL)
+      ElementHolon cellElement = new ElementHolon(
+            document.createElement(TAG_NAME_CELL)
             );
       cellElement.setName(name);
       cellElement.setParentElement(getRootElement());
@@ -90,16 +96,16 @@ public class DocumentCell extends XMLDocument implements Iterable<ElementHolonMa
     * Get an iterator over cell elements
     */
    @Override
-   public Iterator<ElementHolonMatrix> iterator() 
+   public Iterator<ElementHolon> iterator() 
    {
       NodeList nodeList = getRootElement().getChildNodes();
-      ArrayList<ElementHolonMatrix> list = new ArrayList<ElementHolonMatrix>();
+      ArrayList<ElementHolon> list = new ArrayList<ElementHolon>();
       for (int i = 0; i < nodeList.getLength(); i++)
       {
          if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE &&
                ((Element)nodeList.item(i)).getTagName().equals("cell"))
          {
-            list.add(new ElementHolonMatrix((Element)nodeList.item(i)));
+            list.add(new ElementHolon((Element)nodeList.item(i)));
          }
       }
       return list.iterator();

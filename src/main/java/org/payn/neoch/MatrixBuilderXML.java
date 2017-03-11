@@ -14,7 +14,6 @@ import org.payn.chsm.io.xml.XMLDocumentModelConfig;
 import org.payn.neoch.io.xmltools.DocumentBoundary;
 import org.payn.neoch.io.xmltools.DocumentCell;
 import org.payn.neoch.io.xmltools.ElementBoundary;
-import org.payn.neoch.io.xmltools.ElementHolonMatrix;
 import org.payn.neoch.io.xmltools.ElementXMLInputMatrix;
 
 /**
@@ -54,10 +53,10 @@ public class MatrixBuilderXML extends MatrixBuilder {
    @Override
    protected void installCells() throws Exception 
    {
-      Iterator<ElementHolonMatrix> cellIter = cellDoc.iterator();
+      Iterator<ElementHolon> cellIter = cellDoc.iterator();
       while (cellIter.hasNext())
       {
-         ElementHolonMatrix cellElem = cellIter.next();
+         ElementHolon cellElem = cellIter.next();
          createCell(cellElem.getName());
       }
    }
@@ -83,10 +82,10 @@ public class MatrixBuilderXML extends MatrixBuilder {
    @Override
    protected void installCellBehaviors() throws Exception 
    {
-      Iterator<ElementHolonMatrix> cellIter = cellDoc.iterator();
+      Iterator<ElementHolon> cellIter = cellDoc.iterator();
       while (cellIter.hasNext())
       {
-         ElementHolonMatrix cellElem = cellIter.next();
+         ElementHolon cellElem = cellIter.next();
          HolonCell newCell = holon.getCell(cellElem.getName());
          Iterator<ElementBehavior> behaviorIter = cellElem.iterator();
          while (behaviorIter.hasNext())

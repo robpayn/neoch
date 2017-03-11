@@ -1,5 +1,6 @@
 package org.payn.neoch.io.xmltools;
 
+import org.payn.chsm.io.xml.ElementHolon;
 import org.w3c.dom.Element;
 
 /**
@@ -8,7 +9,7 @@ import org.w3c.dom.Element;
  * @author v78h241
  *
  */
-public class ElementBoundary extends ElementHolonMatrix {
+public class ElementBoundary extends ElementHolon {
    
    /**
     * Tag name for the element

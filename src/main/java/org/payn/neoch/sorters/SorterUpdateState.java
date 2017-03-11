@@ -1,19 +1,19 @@
-package org.payn.neoch.dependencies;
+package org.payn.neoch.sorters;
 
 import java.util.ArrayList;
 
 import org.payn.chsm.Processor;
-import org.payn.chsm.dependencies.DependencyHandlerUpdate;
 import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
-import org.payn.neoch.UpdaterTrade;
+import org.payn.chsm.sorters.SorterUpdate;
+import org.payn.neoch.UpdaterState;
 
 /**
- * Dependency handler for trade phase updating processors
+ * Sorter for ordering calls to trade phase updating processors
  * 
  * @author robpayn
  *
  */
-public class DependencyHandlerUpdateTrade extends DependencyHandlerUpdate {
+public class SorterUpdateState extends SorterUpdate {
 
    /**
     * Create a new instance based on a list of updaters
@@ -21,7 +21,7 @@ public class DependencyHandlerUpdateTrade extends DependencyHandlerUpdate {
     * @param updaters
     *       list of updaters
     */
-   public DependencyHandlerUpdateTrade(ArrayList<UpdaterSimpleAuto> updaters) 
+   public SorterUpdateState(ArrayList<UpdaterSimpleAuto> updaters) 
    {
       super(updaters);
    }
@@ -32,9 +32,9 @@ public class DependencyHandlerUpdateTrade extends DependencyHandlerUpdate {
    @Override
    public void addUpdateDependency(Processor processor, Processor neededProcessor) 
    {
-      if (UpdaterTrade.class.isInstance(neededProcessor))
+      if (UpdaterState.class.isInstance(neededProcessor))
       {
-         addToGraph((UpdaterTrade)processor, (UpdaterTrade)neededProcessor);
+         addToGraph((UpdaterState)processor, (UpdaterState)neededProcessor);
       }
    }
 
