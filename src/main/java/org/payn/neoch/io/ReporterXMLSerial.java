@@ -3,14 +3,13 @@ package org.payn.neoch.io;
 import java.io.File;
 
 import org.payn.chsm.Holon;
-import org.payn.chsm.ModelLoader;
+import org.payn.chsm.ModelLoaderXML;
 import org.payn.chsm.io.file.ReporterSingleThread;
+import org.payn.chsm.io.xml.XMLDocumentModelConfig;
 import org.payn.neoch.HolonMatrix;
 import org.payn.neoch.MatrixBuilderXML;
-import org.payn.neoch.MatrixLoaderXML;
 import org.payn.neoch.io.xmltools.DocumentBoundary;
 import org.payn.neoch.io.xmltools.DocumentCell;
-import org.payn.neoch.io.xmltools.XMLDocumentMatrixConfig;
 
 /**
  * Output handler that creates serializable XML output for the XML builder
@@ -40,7 +39,7 @@ public class ReporterXMLSerial extends ReporterSingleThread {
    /**
     * Configuration xml document
     */
-   private XMLDocumentMatrixConfig configDoc;
+   private XMLDocumentModelConfig configDoc;
 
    /**
     * Buffered iteration count
@@ -67,14 +66,24 @@ public class ReporterXMLSerial extends ReporterSingleThread {
    @Override
    public void bufferOutput() throws Exception 
    {
-      ModelLoader<?> matrixLoader = matrix.getBuilder().getLoader();
-      if (!(MatrixLoaderXML.class.isInstance(matrixLoader) && 
-            MatrixBuilderXML.class.isInstance(matrix.getBuilder())))
+      ModelLoaderXML matrixLoader = null;
+      try
       {
-         throw new Exception("XML serial outputter only works when the matrix builder and loader are both XML based");
+         matrixLoader = (ModelLoaderXML)matrix.getBuilder().getLoader();
+         if (!MatrixBuilderXML.class.isInstance(matrix.getBuilder()))
+         {
+            throw new Exception();
+         }
       }
-      configDoc = ((MatrixLoaderXML)matrixLoader).getDocument();
-      configDoc.changeRootBehaviors(matrix);
+      catch(Exception e)
+      {
+         throw new Exception(
+               "XML serial outputter requires XML based builder and loader"
+               + "");
+      }
+      configDoc = matrixLoader.getDocument();
+      configDoc.getHolonElement().clearBehaviorElements();
+      configDoc.getHolonElement().createBehaviorElements(matrix);
       cellDoc = new DocumentCell();
       cellDoc.createCellElements(matrix.getCellMap());
       boundDoc = new DocumentBoundary();

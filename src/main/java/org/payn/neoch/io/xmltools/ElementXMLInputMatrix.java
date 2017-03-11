@@ -2,27 +2,17 @@ package org.payn.neoch.io.xmltools;
 
 import java.io.File;
 
-import org.payn.chsm.io.xml.ElementHelper;
+import org.payn.chsm.io.xml.ElementXMLInput;
 import org.w3c.dom.Element;
 
 /**
- * Element helper containint information about cell and boundary input
+ * Element helper containing information about cell and boundary input
  * 
  * @author robpayn
  *
  */
-public class ElementXMLInput extends ElementHelper {
+public class ElementXMLInputMatrix extends ElementXMLInput {
    
-   /**
-    * Tag name for the element
-    */
-   public static final String TAG_NAME = "xmlinput";
-
-   /**
-    * Input directory
-    */
-   private File inputDirectory;
-
    /**
     * Constructor based on the provided input XML element and a working directory
     * 
@@ -30,22 +20,9 @@ public class ElementXMLInput extends ElementHelper {
     * @param workingDir
     * @throws Exception
     */
-   public ElementXMLInput(Element element, File workingDir) throws Exception 
+   public ElementXMLInputMatrix(Element element, File workingDir) throws Exception 
    {
-      super(element);
-      getInputDirectory(workingDir);
-   }
-
-   /**
-    * Check if the "from working directory" flag is set
-    * 
-    * @return
-    *       true if set, false otherewise
-    */
-   public boolean isFromWorkingDir() 
-   {
-      
-      return Boolean.valueOf(getAttribute("fromWorkingDir"));
+      super(element, workingDir);
    }
 
    /**
@@ -71,29 +48,6 @@ public class ElementXMLInput extends ElementHelper {
    private String getCellFilePath() 
    {
       return this.getFirstChildElementHelper("files").getAttribute("cellFile");
-   }
-
-   /**
-    * Get the input directory based on working directory flag
-    * 
-    * @param workingDir
-    *       working directory
-    * @throws Exception
-    */
-   private void getInputDirectory(File workingDir) throws Exception
-   {
-      if (isFromWorkingDir())
-      {
-         inputDirectory = workingDir;
-      }
-      else
-      {
-         inputDirectory = new File(getAttribute("path")); 
-      }
-      if (!inputDirectory.isDirectory())
-      {
-         throw new Exception("RawXML source must be a directory.");
-      }
    }
 
    /**

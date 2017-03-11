@@ -37,7 +37,7 @@ public class ElementHolonMatrix extends ElementHolon {
     *       a matrix behavior element
     *       
     */
-   public ElementBehaviorMatrix createBehaviorElement(Behavior behavior)
+   public ElementBehavior createBehaviorElement(Behavior behavior)
    {
       return createBehaviorElement(behavior, true);
    }
@@ -46,10 +46,10 @@ public class ElementHolonMatrix extends ElementHolon {
     * Overrides the super method to return the matrix based type
     */
    @Override
-   public ElementBehaviorMatrix createBehaviorElement(Behavior behavior, boolean install) 
+   public ElementBehavior createBehaviorElement(Behavior behavior, boolean install) 
    {
-      ElementBehaviorMatrix element =
-            (ElementBehaviorMatrix)super.createBehaviorElement(behavior, install);
+      ElementBehavior element =
+            (ElementBehavior)super.createBehaviorElement(behavior, install);
       return element;
    }   
    
@@ -57,9 +57,9 @@ public class ElementHolonMatrix extends ElementHolon {
     * Overrides the super method to create the matrix based type
     */
    @Override
-   protected ElementBehaviorMatrix newBehaviorInstance(Element element) 
+   protected ElementBehavior newBehaviorInstance(Element element) 
    {
-      return new ElementBehaviorMatrix(element);
+      return new ElementBehavior(element);
    }
 
    /**
@@ -69,10 +69,10 @@ public class ElementHolonMatrix extends ElementHolon {
     *       iterator
     */
    @Override
-   public Iterator<ElementBehaviorMatrix> iterator() 
+   public Iterator<ElementBehavior> iterator() 
    {
       NodeList nodeList = element.getChildNodes();
-      ArrayList<ElementBehaviorMatrix> list = new ArrayList<ElementBehaviorMatrix>();
+      ArrayList<ElementBehavior> list = new ArrayList<ElementBehavior>();
       for (int i = 0; i < nodeList.getLength(); i++)
       {
          if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE &&

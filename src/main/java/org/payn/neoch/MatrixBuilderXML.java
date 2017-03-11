@@ -7,16 +7,15 @@ import org.payn.chsm.Behavior;
 import org.payn.chsm.Holon;
 import org.payn.chsm.Resource;
 import org.payn.chsm.io.xml.ElementBehavior;
+import org.payn.chsm.io.xml.ElementBuilder;
 import org.payn.chsm.io.xml.ElementHolon;
 import org.payn.chsm.io.xml.ElementInitValue;
+import org.payn.chsm.io.xml.XMLDocumentModelConfig;
 import org.payn.neoch.io.xmltools.DocumentBoundary;
 import org.payn.neoch.io.xmltools.DocumentCell;
-import org.payn.neoch.io.xmltools.ElementBehaviorMatrix;
 import org.payn.neoch.io.xmltools.ElementBoundary;
-import org.payn.neoch.io.xmltools.ElementBuilder;
 import org.payn.neoch.io.xmltools.ElementHolonMatrix;
-import org.payn.neoch.io.xmltools.ElementXMLInput;
-import org.payn.neoch.io.xmltools.XMLDocumentMatrixConfig;
+import org.payn.neoch.io.xmltools.ElementXMLInputMatrix;
 
 /**
  * Builds a NEO lite matrix based on XML input. 
@@ -44,7 +43,10 @@ public class MatrixBuilderXML extends MatrixBuilder {
    @Override
    public void initializeBuildSources() throws Exception 
    {
-      ElementXMLInput inputElem = element.getXMLInputElement(workingDir);
+      ElementXMLInputMatrix inputElem = new ElementXMLInputMatrix(
+            element.getXMLInputElement(), 
+            workingDir
+            );
       cellDoc = new DocumentCell(inputElem.getCellFile());
       boundDoc = new DocumentBoundary(inputElem.getBoundaryFile());
    }
@@ -86,7 +88,7 @@ public class MatrixBuilderXML extends MatrixBuilder {
       {
          ElementHolonMatrix cellElem = cellIter.next();
          HolonCell newCell = holon.getCell(cellElem.getName());
-         Iterator<ElementBehaviorMatrix> behaviorIter = cellElem.iterator();
+         Iterator<ElementBehavior> behaviorIter = cellElem.iterator();
          while (behaviorIter.hasNext())
          {
             loadBehavior(newCell, behaviorIter.next());
@@ -112,10 +114,10 @@ public class MatrixBuilderXML extends MatrixBuilder {
          }
          
          // Install behaviors and assign specified initial values for state variables.
-         Iterator<ElementBehaviorMatrix> behaviorIter = boundElem.iterator();
+         Iterator<ElementBehavior> behaviorIter = boundElem.iterator();
          while(behaviorIter.hasNext())
          {
-            ElementBehaviorMatrix behaviorElem = behaviorIter.next();
+            ElementBehavior behaviorElem = behaviorIter.next();
             loadBehavior(boundary, behaviorElem);
          }
          
@@ -125,7 +127,7 @@ public class MatrixBuilderXML extends MatrixBuilder {
             behaviorIter = adjBoundElem.iterator();
             while(behaviorIter.hasNext())
             {
-               ElementBehaviorMatrix behaviorElem = behaviorIter.next();
+               ElementBehavior behaviorElem = behaviorIter.next();
                loadBehavior(adjBoundary, behaviorElem);
             }
          }
@@ -142,7 +144,7 @@ public class MatrixBuilderXML extends MatrixBuilder {
     * @throws Exception
     *       if error in loading behavior
     */
-   private Behavior loadBehavior(Holon targetHolon, ElementBehaviorMatrix element) 
+   private Behavior loadBehavior(Holon targetHolon, ElementBehavior element) 
          throws Exception 
    {
       Behavior behavior = getBehaviorFromResource(element.getResourceName(), element.getName());
@@ -213,14 +215,15 @@ public class MatrixBuilderXML extends MatrixBuilder {
       }
       
       // Parse the XML configuration file
-      XMLDocumentMatrixConfig document = new XMLDocumentMatrixConfig(configFile);
+      XMLDocumentModelConfig document = new XMLDocumentModelConfig(configFile);
       element = document.getBuilderElement();
 
       // Create the matrix and install global behaviors (time behavior required)
-      loggerManager.statusUpdate("Creating the matrix holon and installing global behaviors...");
+      loggerManager.statusUpdate(
+            "Building the matrix and installing global behaviors..."
+            );
       ElementHolon holonElement = document.getHolonElement();
-      
-      setHolon(new HolonMatrix(holonElement.getName(), this));
+      holon = new HolonMatrix(holonElement.getName(), this, controller);
       Iterator<?> behaviorIter = document.getHolonElement().iterator();
       while (behaviorIter.hasNext())
       {
@@ -239,9 +242,9 @@ public class MatrixBuilderXML extends MatrixBuilder {
                ));
       }
 
-      // Build the cells and boundaries in the matrix
-      loggerManager.statusUpdate("Building the matrix...");
-      holon.setProcessor(controller);
+      // Install the cells and boundaries in the matrix
+      loggerManager.statusUpdate("Installing states in the matrix...");
+      installStates();
       
       return holon;
    }

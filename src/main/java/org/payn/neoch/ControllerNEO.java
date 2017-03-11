@@ -1,10 +1,8 @@
 package org.payn.neoch;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.payn.chsm.Processor;
-import org.payn.chsm.State;
 import org.payn.chsm.processors.ControllerTimeStep;
 import org.payn.chsm.processors.interfaces.InitializerSimpleAuto;
 import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
@@ -16,32 +14,6 @@ import org.payn.chsm.processors.interfaces.UpdaterSimpleAuto;
  *
  */
 public abstract class ControllerNEO extends ControllerTimeStep {
-
-   /**
-    * Main entry point.  Construct a NEO-CH matrix and processor and execute.
-    * 
-    * @param args
-    *       command line arguments
-    */
-   public static void main(String[] args)
-   {
-      try 
-      {
-         MatrixBuilder builder = MatrixBuilder.loadBuilder(
-               new File(System.getProperty("user.dir")),
-               null,
-               args
-               );
-         HolonMatrix matrix = builder.createModel();
-         ControllerNEO controller = matrix.getController();
-         controller.initializeController();
-         controller.executeController();
-      } 
-      catch (Exception e) 
-      {
-         e.printStackTrace();
-      }
-   }
 
    /**
     * List of initializing processors
@@ -153,62 +125,6 @@ public abstract class ControllerNEO extends ControllerTimeStep {
       infoUpdaters = new ArrayList<UpdaterSimpleAuto>();
    }
    
-   /**
-    * Overrides the implementation in ProcessorAbstract because
-    * this processor operates directly on the state's reference
-    * to the value when creating a new value.
-    */
-   @Override
-   public void setState(State state) throws Exception
-   {
-      this.state = state;
-      if (state.getValue() == null)
-      {
-         createValue();
-      }
-      else
-      {
-         setValueFromState();
-      }
-   }
-
-   /**
-    * Overrides the implementation in ControllerHolon to set the reference
-    * from the state and to run the builder
-    */
-   @Override
-   public void createValue() throws Exception 
-   {
-      super.createValue();
-      state.setValue(value);
-      runBuilder();
-   }
-   
-   /**
-    * Overrides the implementation in ControllerHolon to run the builder
-    */
-   @Override
-   public void setValueFromState() throws Exception
-   {
-      super.setValueFromState();
-      runBuilder();
-   }
-   
-   /**
-    * Run the builder
-    * 
-    * @throws Exception
-    *       if builder has not been specified
-    */
-   protected void runBuilder() throws Exception
-   {
-      if (builder == null)
-      {
-         throw new Exception("NEO controller requires a builder to create the matrix.");
-      }
-      builder.buildModel();
-   }
-
    /**
     * Get the class loader
     */

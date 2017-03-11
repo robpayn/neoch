@@ -8,8 +8,10 @@ import org.payn.chsm.ModelBuilder;
 import org.payn.chsm.ModelLoader;
 import org.payn.chsm.resources.time.BehaviorTime;
 
+import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
+
 /**
- * Builds a NEO lite matrix
+ * Builds a matrix for a NEOCH model
  * 
  * @author robpayn
  *
@@ -17,44 +19,76 @@ import org.payn.chsm.resources.time.BehaviorTime;
 public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
    
    /**
-    * Static method to build the matrix based on the initial configuration information in the xml
-    * file in the specified working directory.
+    * Main entry point.  Construct a NEOCH model and execute.
+    * Model will be configured based on the loader and configuration
+    * specified in the command line.
+    * 
+    * @param args
+    *       command line arguments
+    */
+   public static void main(String[] args)
+   {
+      try 
+      {
+         MatrixBuilder builder = MatrixBuilder.loadBuilder(
+               new File(System.getProperty("user.dir")),
+               args
+               );
+         HolonMatrix matrix = builder.buildModel();
+         matrix.getController().initializeController();
+         matrix.getController().executeController();
+      } 
+      catch (Exception e) 
+      {
+         e.printStackTrace();
+      }
+   }
+
+   /**
+    * Static method to load the builder for the matrix,
+    * as configured by command line arguments.
+    * 
+    * <p>Command line arguments must be formated by space-delimited
+    * &ltkey&gt=&ltvalue&gt format</p>
+    * 
     * 
     * @param args
     *       command line arguments
     * @param workingDir
-    *       working directory
-    * @param modelLoader 
-    *       loader for the builder (will look for definition in the command line if this is null)
+    *       working directory for the model
     * @return
-    *       the cell network controller created by the factory
+    *       the builder
     * @throws Exception
     *       if error in creating cell network
     */
-   public static MatrixBuilder loadBuilder(File workingDir, 
-         ModelLoader<?> modelLoader, String[] args) throws Exception
+   public static MatrixBuilder loadBuilder(File workingDir, String[] args) 
+         throws Exception
    {
       HashMap<String,String> argMap = ModelLoader.createArgMap(args);
-      return loadBuilder(workingDir, modelLoader, argMap);
+      return loadBuilder(workingDir, argMap, null);
    }
    
    /**
-    * Load the matrix builder
+    * Static method to load the builder for the matrix,
+    * as configured by key-value pairings in command line 
+    * arguments.
     * 
-    * @param argMap
-    *       map of command line arguments
     * @param workingDir
     *       working directory
+    * @param argMap
+    *       map of command line arguments
     * @param modelLoader
-    *       loader object to use for loading, can be null if 
-    *       information about loader is in command line
+    *       loader object to use for loading.  If null,
+    *       loader specified in command line will be
+    *       loaded and executed
     * @return
     *       matrix builder object
     * @throws Exception
     *       if error in loading
     */
    public static MatrixBuilder loadBuilder(File workingDir, 
-         ModelLoader<?> modelLoader, HashMap<String, String> argMap) throws Exception 
+         HashMap<String, String> argMap, ModelLoader modelLoader) 
+         throws Exception 
    {
       // Check for valid working directory
       if (!workingDir.exists()) 
@@ -72,14 +106,17 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
                ));
       }
       
-      // Load and instantiate the builder
+      // Load the loader
+      // If the provided loader is null, attempt to load the loader
+      // specified in command line arguments
       System.out.println();
-      if (modelLoader == null || 
+      ModelLoader loader = modelLoader;
+      if (loader == null || 
             (argMap.containsKey(ModelLoader.ARG_FILE_PATH) && 
                   argMap.containsKey(ModelLoader.ARG_CLASS_PATH))
             )
       {
-         modelLoader = (ModelLoader<?>)ModelLoader.createObjectInstance(
+         loader = (ModelLoader)ModelLoader.createObjectInstance(
                MatrixBuilder.class.getClassLoader(),
                new File(argMap.get(ModelLoader.ARG_FILE_PATH)),
                argMap.get(ModelLoader.ARG_CLASS_PATH),
@@ -90,11 +127,22 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
             "Loading with %s ...",
             modelLoader.getClass().getCanonicalName()
             ));
-      MatrixBuilder builder = (MatrixBuilder)modelLoader.load(argMap, workingDir);
       
-      return builder;
-
+      // Load all model components and return a reference to the builder
+      // Throw an error if the builder is not a MatrixBuilder type
+      try
+      {
+         return (MatrixBuilder)loader.load(workingDir, argMap);
+      }
+      catch (Exception e)
+      {
+         throw new Exception(String.format(
+               "Loader class %s cannot load a matrix builder",
+               Builder.class.getCanonicalName()
+               ), e);
+      }
    }
+   
    /**
     * List of global behaviors
     */
@@ -151,7 +199,8 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
     * @throws Exception
     *       if error in creating the boundary
     */
-   public HolonBoundary createBoundary(String boundName, String cellName) throws Exception 
+   public HolonBoundary createBoundary(String boundName, String cellName) 
+         throws Exception 
    {
       return new HolonBoundary(boundName, cellName, holon);
    }
@@ -170,8 +219,8 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
     * @throws Exception
     *       if error in creating boundary
     */
-   public HolonBoundary createBoundary(String boundName, String cellName, HolonBoundary adjBoundary) 
-               throws Exception 
+   public HolonBoundary createBoundary(String boundName, String cellName, 
+         HolonBoundary adjBoundary) throws Exception 
    {
       HolonBoundary boundary = createBoundary(boundName, cellName);
       boundary.setAdjacentBoundary(adjBoundary);
@@ -195,7 +244,7 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
     *       if error in creating cell network
     */
    @Override
-   public HolonMatrix createModel() throws Exception
+   public HolonMatrix buildModel() throws Exception
    {
       // Build the matrix
       loggerManager.statusUpdate("");
@@ -210,16 +259,24 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
    }
    
    @Override 
-   public void buildModel() throws Exception
+   public void installStates() throws Exception
    {
       initializeBuildSources();
-      loggerManager.statusUpdate("   Installing cells in matrix...");
+      loggerManager.statusUpdate(
+            "   Installing cells in matrix..."
+            );
       installCells();
-      loggerManager.statusUpdate("   Installing boundaries in matrix...");
+      loggerManager.statusUpdate(
+            "   Installing boundaries in matrix..."
+            );
       installBoundaries();
-      loggerManager.statusUpdate("   Installing behaviors in cells and setting state variable initial values...");
+      loggerManager.statusUpdate(
+            "   Installing behaviors in cells and setting state variable initial values..."
+            );
       installCellBehaviors();
-      loggerManager.statusUpdate("   Installing behaviors in boundaries and setting state variable initial values...");
+      loggerManager.statusUpdate(
+            "   Installing behaviors in boundaries and setting state variable initial values..."
+            );
       installBoundaryBehaviors();
    }
    

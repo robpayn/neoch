@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 
 import org.payn.chsm.HolonAbstract;
 import org.payn.chsm.State;
+import org.payn.chsm.processors.ControllerHolon;
 
 /**
  * Matrix for a NEO lite simulation model
@@ -52,7 +53,7 @@ public class HolonMatrix extends HolonAbstract {
    private MatrixBuilder builder;
 
    /**
-    * Getter 
+    * Get the builder that created this matrix
     * 
     * @return
     *       MatrixBuilderLoader used to create matrix
@@ -80,13 +81,17 @@ public class HolonMatrix extends HolonAbstract {
     *       name of matrix
     * @param builder
     *       matrix builder used to create this matrix
+    * @param controller 
+    *       controller for the holon
     * @throws Exception
     *       if error in constructing matrix
     */
-   public HolonMatrix(String name, MatrixBuilder builder) throws Exception 
+   public HolonMatrix(String name, MatrixBuilder builder, ControllerHolon controller) 
+         throws Exception 
    {
       super(name, null);
       this.builder = builder;
+      this.setProcessor(controller);
       cellMap = new LinkedHashMap<String,HolonCell>();
       boundMap = new LinkedHashMap<String,HolonBoundary>();
    }
