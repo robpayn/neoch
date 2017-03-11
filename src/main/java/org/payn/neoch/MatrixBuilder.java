@@ -1,9 +1,11 @@
 package org.payn.neoch;
 
+import java.io.File;
 import java.util.HashMap;
 
 import org.payn.chsm.Behavior;
 import org.payn.chsm.ModelBuilder;
+import org.payn.chsm.ModelLoader;
 import org.payn.chsm.resources.time.BehaviorTime;
 
 /**
@@ -14,6 +16,85 @@ import org.payn.chsm.resources.time.BehaviorTime;
  */
 public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
    
+   /**
+    * Static method to build the matrix based on the initial configuration information in the xml
+    * file in the specified working directory.
+    * 
+    * @param args
+    *       command line arguments
+    * @param workingDir
+    *       working directory
+    * @param modelLoader 
+    *       loader for the builder (will look for definition in the command line if this is null)
+    * @return
+    *       the cell network controller created by the factory
+    * @throws Exception
+    *       if error in creating cell network
+    */
+   public static MatrixBuilder loadBuilder(File workingDir, 
+         ModelLoader<?> modelLoader, String[] args) throws Exception
+   {
+      HashMap<String,String> argMap = ModelLoader.createArgMap(args);
+      return loadBuilder(workingDir, modelLoader, argMap);
+   }
+   
+   /**
+    * Load the matrix builder
+    * 
+    * @param argMap
+    *       map of command line arguments
+    * @param workingDir
+    *       working directory
+    * @param modelLoader
+    *       loader object to use for loading, can be null if 
+    *       information about loader is in command line
+    * @return
+    *       matrix builder object
+    * @throws Exception
+    *       if error in loading
+    */
+   public static MatrixBuilder loadBuilder(File workingDir, 
+         ModelLoader<?> modelLoader, HashMap<String, String> argMap) throws Exception 
+   {
+      // Check for valid working directory
+      if (!workingDir.exists()) 
+      {
+         throw new Exception(String.format(
+               "Specified working directory does not exist.",
+               workingDir.getAbsolutePath()
+               ));
+      }
+      else if (workingDir.isFile()) 
+      {
+         throw new Exception(String.format(
+               "Working directory %s cannot be a file.",
+               workingDir.getAbsolutePath()
+               ));
+      }
+      
+      // Load and instantiate the builder
+      System.out.println();
+      if (modelLoader == null || 
+            (argMap.containsKey(ModelLoader.ARG_FILE_PATH) && 
+                  argMap.containsKey(ModelLoader.ARG_CLASS_PATH))
+            )
+      {
+         modelLoader = (ModelLoader<?>)ModelLoader.createObjectInstance(
+               MatrixBuilder.class.getClassLoader(),
+               new File(argMap.get(ModelLoader.ARG_FILE_PATH)),
+               argMap.get(ModelLoader.ARG_CLASS_PATH),
+               "Matrix loader"
+               );
+      }
+      System.out.println(String.format(
+            "Loading with %s ...",
+            modelLoader.getClass().getCanonicalName()
+            ));
+      MatrixBuilder builder = (MatrixBuilder)modelLoader.load(argMap, workingDir);
+      
+      return builder;
+
+   }
    /**
     * List of global behaviors
     */

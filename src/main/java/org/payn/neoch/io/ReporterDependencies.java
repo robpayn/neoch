@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 
 import org.payn.chsm.Processor;
-import org.payn.chsm.io.file.OutputHandlerFileSystem;
+import org.payn.chsm.io.file.ReporterFileSystem;
 import org.payn.neoch.ControllerNEO;
 
 /**
@@ -14,7 +14,7 @@ import org.payn.neoch.ControllerNEO;
  * @author robpayn
  *
  */
-public class OutputHandlerDependencies extends OutputHandlerFileSystem {
+public class ReporterDependencies extends ReporterFileSystem {
    
    /**
     * No operations necessary to open location

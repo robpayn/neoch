@@ -1,7 +1,7 @@
 package org.payn.neoch.io;
 
-import org.payn.chsm.io.OutputHandlerFactoryXML;
-import org.payn.chsm.io.file.OutputHandlerFileSystemFactoryXML;
+import org.payn.chsm.io.ReporterFactoryXML;
+import org.payn.chsm.io.file.ReporterFileSystemFactoryXML;
 
 /**
  * Factory for dependencies output handler
@@ -9,18 +9,18 @@ import org.payn.chsm.io.file.OutputHandlerFileSystemFactoryXML;
  * @author v78h241
  *
  */
-public class OutputHandlerDependenciesFactoryXML extends OutputHandlerFactoryXML<OutputHandlerDependencies> {
+public class OutputHandlerDependenciesFactoryXML extends ReporterFactoryXML<ReporterDependencies> {
 
    @Override
    public void init() 
    {
-      new OutputHandlerFileSystemFactoryXML(outputHandler, config).init();
+      new ReporterFileSystemFactoryXML(reporter, config).init();
    }
 
    @Override
-   public OutputHandlerDependencies newOutputHandler() 
+   public ReporterDependencies newReporter() 
    {
-      return new OutputHandlerDependencies();
+      return new ReporterDependencies();
    }
 
 }

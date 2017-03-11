@@ -1,4 +1,4 @@
-package org.payn.neoch.io;
+package org.payn.neoch;
 
 import java.io.File;
 import java.util.Iterator;
@@ -9,10 +9,6 @@ import org.payn.chsm.Resource;
 import org.payn.chsm.io.xml.ElementBehavior;
 import org.payn.chsm.io.xml.ElementHolon;
 import org.payn.chsm.io.xml.ElementInitValue;
-import org.payn.neoch.HolonBoundary;
-import org.payn.neoch.HolonCell;
-import org.payn.neoch.HolonMatrix;
-import org.payn.neoch.MatrixBuilder;
 import org.payn.neoch.io.xmltools.DocumentBoundary;
 import org.payn.neoch.io.xmltools.DocumentCell;
 import org.payn.neoch.io.xmltools.ElementBehaviorMatrix;
@@ -20,7 +16,7 @@ import org.payn.neoch.io.xmltools.ElementBoundary;
 import org.payn.neoch.io.xmltools.ElementBuilder;
 import org.payn.neoch.io.xmltools.ElementHolonMatrix;
 import org.payn.neoch.io.xmltools.ElementXMLInput;
-import org.payn.neoch.io.xmltools.XMLDocumentConfig;
+import org.payn.neoch.io.xmltools.XMLDocumentMatrixConfig;
 
 /**
  * Builds a NEO lite matrix based on XML input. 
@@ -217,7 +213,7 @@ public class MatrixBuilderXML extends MatrixBuilder {
       }
       
       // Parse the XML configuration file
-      XMLDocumentConfig document = new XMLDocumentConfig(configFile);
+      XMLDocumentMatrixConfig document = new XMLDocumentMatrixConfig(configFile);
       element = document.getBuilderElement();
 
       // Create the matrix and install global behaviors (time behavior required)

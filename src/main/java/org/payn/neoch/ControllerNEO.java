@@ -27,7 +27,7 @@ public abstract class ControllerNEO extends ControllerTimeStep {
    {
       try 
       {
-         MatrixBuilder builder = MatrixLoader.loadBuilder(
+         MatrixBuilder builder = MatrixBuilder.loadBuilder(
                new File(System.getProperty("user.dir")),
                null,
                args

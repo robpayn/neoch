@@ -1,7 +1,7 @@
 package org.payn.neoch.io;
 
-import org.payn.chsm.io.OutputHandlerFactoryXML;
-import org.payn.chsm.io.file.OutputHandlerIntervalFactoryXML;
+import org.payn.chsm.io.ReporterFactoryXML;
+import org.payn.chsm.io.file.ReporterIntervalFactoryXML;
 
 /**
  * Factory for a serial XML output handler
@@ -9,18 +9,18 @@ import org.payn.chsm.io.file.OutputHandlerIntervalFactoryXML;
  * @author v78h241
  *
  */
-public class OutputHandlerXMLSerialFactoryXML extends OutputHandlerFactoryXML<OutputHandlerXMLSerial> {
+public class OutputHandlerXMLSerialFactoryXML extends ReporterFactoryXML<ReporterXMLSerial> {
 
    @Override
    public void init() 
    {
-      new OutputHandlerIntervalFactoryXML(outputHandler, config).init();
+      new ReporterIntervalFactoryXML(reporter, config).init();
    }
 
    @Override
-   public OutputHandlerXMLSerial newOutputHandler() 
+   public ReporterXMLSerial newReporter() 
    {
-      return new OutputHandlerXMLSerial();
+      return new ReporterXMLSerial();
    }
 
 }

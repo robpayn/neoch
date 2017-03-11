@@ -4,11 +4,13 @@ import java.io.File;
 
 import org.payn.chsm.Holon;
 import org.payn.chsm.ModelLoader;
-import org.payn.chsm.io.file.OutputHandlerSingleThread;
+import org.payn.chsm.io.file.ReporterSingleThread;
 import org.payn.neoch.HolonMatrix;
+import org.payn.neoch.MatrixBuilderXML;
+import org.payn.neoch.MatrixLoaderXML;
 import org.payn.neoch.io.xmltools.DocumentBoundary;
 import org.payn.neoch.io.xmltools.DocumentCell;
-import org.payn.neoch.io.xmltools.XMLDocumentConfig;
+import org.payn.neoch.io.xmltools.XMLDocumentMatrixConfig;
 
 /**
  * Output handler that creates serializable XML output for the XML builder
@@ -18,7 +20,7 @@ import org.payn.neoch.io.xmltools.XMLDocumentConfig;
  * @author robpayn
  *
  */
-public class OutputHandlerXMLSerial extends OutputHandlerSingleThread {
+public class ReporterXMLSerial extends ReporterSingleThread {
    
    /**
     * Matrix containing the output data
@@ -38,7 +40,7 @@ public class OutputHandlerXMLSerial extends OutputHandlerSingleThread {
    /**
     * Configuration xml document
     */
-   private XMLDocumentConfig configDoc;
+   private XMLDocumentMatrixConfig configDoc;
 
    /**
     * Buffered iteration count
