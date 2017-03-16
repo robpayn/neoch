@@ -8,8 +8,6 @@ import org.payn.chsm.ModelBuilder;
 import org.payn.chsm.ModelLoader;
 import org.payn.chsm.resources.time.BehaviorTime;
 
-import com.oracle.webservices.internal.api.databinding.Databinding.Builder;
-
 /**
  * Builds a matrix for a NEOCH model
  * 
@@ -138,7 +136,7 @@ public abstract class MatrixBuilder extends ModelBuilder<HolonMatrix> {
       {
          throw new Exception(String.format(
                "Loader class %s cannot load a matrix builder",
-               Builder.class.getCanonicalName()
+               loader.getClass().getCanonicalName()
                ), e);
       }
    }
