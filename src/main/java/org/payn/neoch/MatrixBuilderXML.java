@@ -1,11 +1,11 @@
 package org.payn.neoch;
 
 import java.io.File;
-import java.util.Iterator;
-
+import java.util.HashMap;
 import org.payn.chsm.Behavior;
 import org.payn.chsm.Holon;
 import org.payn.chsm.Resource;
+import org.payn.chsm.io.initialize.InitialConditionTable;
 import org.payn.chsm.io.xmltools.ElementBehavior;
 import org.payn.chsm.io.xmltools.ElementBuilder;
 import org.payn.chsm.io.xmltools.ElementHolon;
@@ -53,28 +53,31 @@ public class MatrixBuilderXML extends MatrixBuilder {
    @Override
    protected void installCells() throws Exception 
    {
-      Iterator<ElementHolon> cellIter = cellDoc.iterator();
-      while (cellIter.hasNext())
+      for (ElementHolon cellElement: cellDoc.getCellList())
       {
-         ElementHolon cellElem = cellIter.next();
-         createCell(cellElem.getName());
+         createCell(cellElement.getName());
       }
    }
 
    @Override
    protected void installBoundaries() throws Exception 
    {
-      Iterator<ElementBoundary> boundIter = boundDoc.iterator();
-      while (boundIter.hasNext())
+      for (ElementBoundary elementBoundary: boundDoc.getBoundaryList())
       {
-         ElementBoundary boundElem = boundIter.next();
-         HolonBoundary boundary = createBoundary(boundElem.getName(), boundElem.getCellName());
+         HolonBoundary boundary = createBoundary(
+               elementBoundary.getName(), 
+               elementBoundary.getCellName()
+               );
          
          // Install the adjacent boundary if specified.
-         ElementBoundary adjBoundElem = boundElem.getAdjacentBoundElement();
+         ElementBoundary adjBoundElem = 
+               elementBoundary.getAdjacentBoundElement();
          if (adjBoundElem.getElement() != null)
          {
-            createBoundary(adjBoundElem.getName(), adjBoundElem.getCellName(), boundary);
+            createBoundary(
+                  adjBoundElem.getName(), 
+                  adjBoundElem.getCellName(), boundary
+                  );
          }
       }
    }
@@ -82,15 +85,35 @@ public class MatrixBuilderXML extends MatrixBuilder {
    @Override
    protected void installCellBehaviors() throws Exception 
    {
-      Iterator<ElementHolon> cellIter = cellDoc.iterator();
-      while (cellIter.hasNext())
+      HashMap<String, ElementBehavior> defaultBehaviorMap = cellDoc.getDefaultBehaviorMap();
+      HashMap<String, InitialConditionTable> behaviorTableMap = 
+            new HashMap<String, InitialConditionTable>();
+      for (ElementBehavior elementBehavior: defaultBehaviorMap.values())
       {
-         ElementHolon cellElem = cellIter.next();
-         HolonCell newCell = holon.getCell(cellElem.getName());
-         Iterator<ElementBehavior> behaviorIter = cellElem.iterator();
-         while (behaviorIter.hasNext())
+         if (elementBehavior.hasInitialConditionConfig())
          {
-            loadBehavior(newCell, behaviorIter.next());
+            InitialConditionTable behaviorTable = InitialConditionTable.getInstance(
+                  new File(
+                        workingDir 
+                        + File.separator 
+                        + elementBehavior.getAttributeInitConditionPath()
+                        ), 
+                  elementBehavior.getAttributeInitConditionDelimiter()
+                  );
+            behaviorTableMap.put(elementBehavior.getFullBehaviorName(), behaviorTable);
+         }
+      }
+      for (ElementHolon cellElement: cellDoc.getCellList())
+      {
+         HolonCell newCell = holon.getCell(cellElement.getName());
+         for (ElementBehavior elementBehavior: cellElement.getBehaviorList())
+         {
+            loadBehavior(
+                  newCell, 
+                  elementBehavior, 
+                  defaultBehaviorMap.get(elementBehavior.getFullBehaviorName()),
+                  behaviorTableMap.get(elementBehavior.getFullBehaviorName())
+                  );
          }
       }
    }
@@ -98,14 +121,32 @@ public class MatrixBuilderXML extends MatrixBuilder {
    @Override
    protected void installBoundaryBehaviors() throws Exception 
    {
-      Iterator<ElementBoundary> boundIter = boundDoc.iterator();
-      while (boundIter.hasNext())
+      HashMap<String, ElementBehavior> defaultBehaviorMap = boundDoc.getDefaultBehaviorMap();
+      HashMap<String, InitialConditionTable> behaviorTableMap = 
+            new HashMap<String, InitialConditionTable>();
+      for (ElementBehavior elementBehavior: defaultBehaviorMap.values())
       {
-         ElementBoundary boundElem = boundIter.next();
-         HolonBoundary boundary = holon.getBoundary(boundElem.getName());
+         if (elementBehavior.hasInitialConditionConfig())
+         {
+            InitialConditionTable behaviorTable = InitialConditionTable.getInstance(
+                  new File(
+                        workingDir 
+                        + File.separator 
+                        + elementBehavior.getAttributeInitConditionPath()
+                        ), 
+                  elementBehavior.getAttributeInitConditionDelimiter()
+                  );
+            behaviorTableMap.put(elementBehavior.getFullBehaviorName(), behaviorTable);
+         }
+      }
+      for (ElementBoundary elementBoundary: boundDoc.getBoundaryList())
+      {
+         HolonBoundary boundary = 
+               holon.getBoundary(elementBoundary.getName());
          
          // Install the adjacent boundary if specified.
-         ElementBoundary adjBoundElem = boundElem.getAdjacentBoundElement();
+         ElementBoundary adjBoundElem = 
+               elementBoundary.getAdjacentBoundElement();
          HolonBoundary adjBoundary = null;
          if (adjBoundElem.getElement() != null)
          {
@@ -113,21 +154,27 @@ public class MatrixBuilderXML extends MatrixBuilder {
          }
          
          // Install behaviors and assign specified initial values for state variables.
-         Iterator<ElementBehavior> behaviorIter = boundElem.iterator();
-         while(behaviorIter.hasNext())
+         for(ElementBehavior elementBehavior: elementBoundary.getBehaviorList())
          {
-            ElementBehavior behaviorElem = behaviorIter.next();
-            loadBehavior(boundary, behaviorElem);
+            loadBehavior(
+                  boundary, 
+                  elementBehavior, 
+                  defaultBehaviorMap.get(elementBehavior.getFullBehaviorName()),
+                  behaviorTableMap.get(elementBehavior.getFullBehaviorName())
+                  );
          }
          
          // Install asymmetric behaviors in adjacent boundary
          if (adjBoundary != null)
          {
-            behaviorIter = adjBoundElem.iterator();
-            while(behaviorIter.hasNext())
+            for (ElementBehavior elementBehavior: adjBoundElem.getBehaviorList())
             {
-               ElementBehavior behaviorElem = behaviorIter.next();
-               loadBehavior(adjBoundary, behaviorElem);
+               loadBehavior(
+                     adjBoundary, 
+                     elementBehavior, 
+                     defaultBehaviorMap.get(elementBehavior.getFullBehaviorName()),
+                     behaviorTableMap.get(elementBehavior.getFullBehaviorName())
+                     );
             }
          }
       }
@@ -143,11 +190,15 @@ public class MatrixBuilderXML extends MatrixBuilder {
     * @throws Exception
     *       if error in loading behavior
     */
-   private Behavior loadBehavior(Holon targetHolon, ElementBehavior element) 
-         throws Exception 
+   private Behavior loadBehavior(
+         Holon targetHolon, 
+         ElementBehavior element, 
+         ElementBehavior defaultElement,
+         InitialConditionTable initialConditionTable
+         ) throws Exception 
    {
       Behavior behavior = getBehaviorFromResource(element.getResourceName(), element.getName());
-      loadInitValues(targetHolon, behavior, element);
+      loadInitValues(targetHolon, behavior, element, defaultElement, initialConditionTable);
       if (element.isInstalled())
       {
          addBehavior(targetHolon, behavior);
@@ -158,7 +209,6 @@ public class MatrixBuilderXML extends MatrixBuilder {
          Resource resource = resourceMap.get(element.getResourceName());
          behavior = resource.getBehavior(element.getName());
       }
-//      loadInitValues(targetHolon, behavior, element);
       return behavior;
    }
    
@@ -174,19 +224,57 @@ public class MatrixBuilderXML extends MatrixBuilder {
     * @throws Exception
     *       if error in loading initial values
     */
-   private void loadInitValues(Holon targetHolon, Behavior behavior,
-         ElementBehavior element) throws Exception 
+   private void loadInitValues(
+         Holon targetHolon, 
+         Behavior behavior,
+         ElementBehavior element, 
+         ElementBehavior defaultElement, 
+         InitialConditionTable initialConditionTable
+         ) throws Exception 
    {
-      Iterator<ElementInitValue> initValIter = element.iterator();
-      while (initValIter.hasNext())
+      if (initialConditionTable != null)
       {
-         ElementInitValue initValElem = initValIter.next();
+         for (ElementInitValue elementInitValue: defaultElement.getInitValueList())
+         {
+            if (elementInitValue.getValue().equals(""))
+            {
+               initializeValue(
+                     targetHolon,
+                     behavior,
+                     elementInitValue.getStateVariableName(),
+                     initialConditionTable.find(
+                           behavior.getName() + "." + elementInitValue.getStateVariableName(),
+                           targetHolon.toString()
+                           ),
+                     elementInitValue.getTypeAlias()
+                     );
+            }
+         }
+      }
+      if (defaultElement != null)
+      {
+         for (ElementInitValue elementInitValue: defaultElement.getInitValueList())
+         {
+            if (!elementInitValue.getValue().equals(""))
+            {
+               initializeValue(
+                     targetHolon,
+                     behavior,
+                     elementInitValue.getStateVariableName(),
+                     elementInitValue.getValue(),
+                     elementInitValue.getTypeAlias()
+                     );
+            }
+         }
+      }
+      for (ElementInitValue elementInitValue: element.getInitValueList())
+      {
          initializeValue(
                targetHolon,
                behavior,
-               initValElem.getStateVariableName(),
-               initValElem.getValue(),
-               initValElem.getTypeAlias()
+               elementInitValue.getStateVariableName(),
+               elementInitValue.getValue(),
+               elementInitValue.getTypeAlias()
                );
       }
    }
@@ -223,18 +311,17 @@ public class MatrixBuilderXML extends MatrixBuilder {
             );
       ElementHolon holonElement = document.getHolonElement();
       holon = new HolonMatrix(holonElement.getName(), this, controller);
-      Iterator<?> behaviorIter = document.getHolonElement().iterator();
-      while (behaviorIter.hasNext())
+      for (ElementBehavior elementBehavior: 
+         document.getHolonElement().getBehaviorList())
       {
-         ElementBehavior behaviorElem = (ElementBehavior)behaviorIter.next();
-         Behavior behavior = resourceMap.get(behaviorElem.getResourceName())
-               .getBehavior(behaviorElem.getName());
-         if (behaviorElem.isInstalled())
+         Behavior behavior = resourceMap.get(elementBehavior.getResourceName())
+               .getBehavior(elementBehavior.getName());
+         if (elementBehavior.isInstalled())
          {
             addBehavior(holon, behavior);
             holon.addInstalledBehavior(behavior);
          }
-         loadInitValues(holon, behavior, behaviorElem);
+         loadInitValues(holon, behavior, elementBehavior, null, null);
          loggerManager.statusUpdate(String.format(
                "   Installed behavior %s", 
                behavior.getName()

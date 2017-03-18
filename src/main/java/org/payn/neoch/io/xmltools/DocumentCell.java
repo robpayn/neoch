@@ -3,10 +3,9 @@ package org.payn.neoch.io.xmltools;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
+import org.payn.chsm.io.xmltools.DocumentHolon;
 import org.payn.chsm.io.xmltools.ElementHolon;
-import org.payn.chsm.io.xmltools.XMLDocument;
 import org.payn.neoch.HolonCell;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,7 +17,7 @@ import org.w3c.dom.NodeList;
  * @author rob payn
  *
  */
-public class DocumentCell extends XMLDocument implements Iterable<ElementHolon> {
+public class DocumentCell extends DocumentHolon {
    
    /**
     * XML tag name for a cell holon element
@@ -93,10 +92,12 @@ public class DocumentCell extends XMLDocument implements Iterable<ElementHolon> 
    }
 
    /**
-    * Get an iterator over cell elements
+    * Get a list of the cell elements
+    * 
+    * @return 
+    *       ArrayList of cell elements
     */
-   @Override
-   public Iterator<ElementHolon> iterator() 
+   public ArrayList<ElementHolon> getCellList() 
    {
       NodeList nodeList = getRootElement().getChildNodes();
       ArrayList<ElementHolon> list = new ArrayList<ElementHolon>();
@@ -108,7 +109,7 @@ public class DocumentCell extends XMLDocument implements Iterable<ElementHolon> 
             list.add(new ElementHolon((Element)nodeList.item(i)));
          }
       }
-      return list.iterator();
+      return list;
    }
 
 }

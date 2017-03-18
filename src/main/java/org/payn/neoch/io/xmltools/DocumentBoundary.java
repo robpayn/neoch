@@ -3,9 +3,8 @@ package org.payn.neoch.io.xmltools;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
-import org.payn.chsm.io.xmltools.XMLDocument;
+import org.payn.chsm.io.xmltools.DocumentHolon;
 import org.payn.neoch.HolonBoundary;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,7 +16,7 @@ import org.w3c.dom.NodeList;
  * @author rob payn
  *
  */
-public class DocumentBoundary extends XMLDocument implements Iterable<ElementBoundary> {
+public class DocumentBoundary extends DocumentHolon {
    
    /**
     * Raw constructor
@@ -115,10 +114,12 @@ public class DocumentBoundary extends XMLDocument implements Iterable<ElementBou
    }
 
    /**
-    * Get an iterator over existing boundary elements
+    * Get the list of boundary elements
+    * 
+    * @return 
+    *       list of boundary elements
     */
-   @Override
-   public Iterator<ElementBoundary> iterator() 
+   public ArrayList<ElementBoundary> getBoundaryList() 
    {
       NodeList nodeList = getRootElement().getChildNodes();
       ArrayList<ElementBoundary> list = new ArrayList<ElementBoundary>();
@@ -130,7 +131,7 @@ public class DocumentBoundary extends XMLDocument implements Iterable<ElementBou
             list.add(new ElementBoundary((Element)nodeList.item(i)));
          }
       }
-      return list.iterator();
+      return list;
    }
 
 }
