@@ -3,7 +3,8 @@ package org.payn.neoch;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import org.payn.chsm.HolonAbstract;
+import org.payn.chsm.HolonBasic;
+import org.payn.chsm.ModelBuilder;
 import org.payn.chsm.State;
 import org.payn.chsm.processors.ControllerHolon;
 
@@ -13,7 +14,7 @@ import org.payn.chsm.processors.ControllerHolon;
  * @author rob payn
  *
  */
-public class HolonMatrix extends HolonAbstract {
+public class HolonMatrix extends HolonBasic {
    
    /**
     * Map of cells
@@ -50,7 +51,7 @@ public class HolonMatrix extends HolonAbstract {
    /**
     * Builder used to create the matrix
     */
-   private MatrixBuilder builder;
+   private ModelBuilder builder;
 
    /**
     * Get the builder that created this matrix
@@ -58,7 +59,7 @@ public class HolonMatrix extends HolonAbstract {
     * @return
     *       MatrixBuilderLoader used to create matrix
     */
-   public MatrixBuilder getBuilder() 
+   public ModelBuilder getBuilder() 
    {
       return builder;
    }
@@ -86,7 +87,7 @@ public class HolonMatrix extends HolonAbstract {
     * @throws Exception
     *       if error in constructing matrix
     */
-   public HolonMatrix(String name, MatrixBuilder builder, ControllerHolon controller) 
+   public HolonMatrix(String name, ModelBuilder builder, ControllerHolon controller) 
          throws Exception 
    {
       super(name, null);

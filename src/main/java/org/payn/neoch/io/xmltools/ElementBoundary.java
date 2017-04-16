@@ -51,7 +51,7 @@ public class ElementBoundary extends ElementHolon {
     */
    public ElementBoundary getAdjacentBoundElement() 
    {
-      return new ElementBoundary(this.getFirstChildElement("adjacent"));
+      return new ElementBoundary(getFirstChildElement("adjacent"));
    }
 
    /**

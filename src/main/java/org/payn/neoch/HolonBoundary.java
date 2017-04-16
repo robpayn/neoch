@@ -3,7 +3,7 @@ package org.payn.neoch;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.payn.chsm.HolonAbstract;
+import org.payn.chsm.HolonBasic;
 import org.payn.chsm.Resource;
 import org.payn.chsm.State;
 import org.payn.chsm.values.ValueStateMap;
@@ -14,7 +14,7 @@ import org.payn.chsm.values.ValueStateMap;
  * @author rob payn
  *
  */
-public class HolonBoundary extends HolonAbstract {
+public class HolonBoundary extends HolonBasic {
    
    /**
     * Attached cell

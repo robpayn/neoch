@@ -1,172 +1,159 @@
 package org.payn.neoch;
 
 import java.io.File;
-import java.util.HashMap;
-import org.payn.chsm.Behavior;
 import org.payn.chsm.Holon;
-import org.payn.chsm.Resource;
-import org.payn.chsm.io.initialize.InitialConditionTable;
+import org.payn.chsm.ModelBuilder;
+import org.payn.chsm.ModelBuilderXML;
+import org.payn.chsm.ModelLoader;
 import org.payn.chsm.io.xmltools.ElementBehavior;
-import org.payn.chsm.io.xmltools.ElementBuilder;
 import org.payn.chsm.io.xmltools.ElementHolon;
-import org.payn.chsm.io.xmltools.ElementInitValue;
-import org.payn.chsm.io.xmltools.XMLDocumentModelConfig;
-import org.payn.neoch.io.xmltools.DocumentBoundary;
-import org.payn.neoch.io.xmltools.DocumentCell;
 import org.payn.neoch.io.xmltools.ElementBoundary;
-import org.payn.neoch.io.xmltools.ElementXMLInputMatrix;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
- * Builds a NEO lite matrix based on XML input. 
+ * Builds a matrix based on information in an XML file
  * 
  * @author robpayn
  *
  */
-public class MatrixBuilderXML extends MatrixBuilder {
-
+public class MatrixBuilderXML extends ModelBuilderXML {
+   
    /**
-    * XML element with builder information
+    * Main entry point.  Construct a NEOCH model and execute.
+    * Model will be configured based on the loader and configuration
+    * specified in the command line.
+    * 
+    * @param args
+    *       command line arguments
     */
-   private ElementBuilder element;
-
-   /**
-    * XML document with cell data
-    */
-   private DocumentCell cellDoc;
-
-   /**
-    * XML document with boundary data
-    */
-   private DocumentBoundary boundDoc;
-
-   @Override
-   public void initializeBuildSources() throws Exception 
+   public static void main(String[] args)
    {
-      ElementXMLInputMatrix inputElem = new ElementXMLInputMatrix(
-            element.getXMLInputElement(), 
-            workingDir
-            );
-      cellDoc = new DocumentCell(inputElem.getCellFile());
-      boundDoc = new DocumentBoundary(inputElem.getBoundaryFile());
-   }
-
-   @Override
-   protected void installCells() throws Exception 
-   {
-      for (ElementHolon cellElement: cellDoc.getCellList())
+      try 
       {
-         createCell(cellElement.getName());
-      }
-   }
-
-   @Override
-   protected void installBoundaries() throws Exception 
-   {
-      for (ElementBoundary elementBoundary: boundDoc.getBoundaryList())
-      {
-         HolonBoundary boundary = createBoundary(
-               elementBoundary.getName(), 
-               elementBoundary.getCellName()
+         ModelBuilder builder = ModelLoader.loadBuilder(
+               new File(System.getProperty("user.dir")),
+               args
                );
-         
-         // Install the adjacent boundary if specified.
-         ElementBoundary adjBoundElem = 
-               elementBoundary.getAdjacentBoundElement();
-         if (adjBoundElem.getElement() != null)
-         {
-            createBoundary(
-                  adjBoundElem.getName(), 
-                  adjBoundElem.getCellName(), boundary
-                  );
-         }
+         HolonMatrix matrix = (HolonMatrix)builder.buildModel();
+         matrix.getController().initializeController();
+         matrix.getController().executeController();
+      } 
+      catch (Exception e) 
+      {
+         e.printStackTrace();
       }
+   }
+   
+   @Override
+   protected Holon createHolon(String name, Holon parentHolon) throws Exception 
+   {
+      return new HolonMatrix(name, this, controller);
    }
 
    @Override
-   protected void installCellBehaviors() throws Exception 
+   protected void installHolons(ElementHolon element, Holon holon) throws Exception
    {
-      HashMap<String, ElementBehavior> defaultBehaviorMap = cellDoc.getDefaultBehaviorMap();
-      HashMap<String, InitialConditionTable> behaviorTableMap = 
-            new HashMap<String, InitialConditionTable>();
-      for (ElementBehavior elementBehavior: defaultBehaviorMap.values())
+      super.installHolons(element, holon);
+      
+      loggerManager.statusUpdate(String.format(
+            "   Installing cells in %s...",
+            holon
+            ));
+      NodeList nodes = 
+            element.getFirstChildElement("cells").getElementsByTagName("cell");
+      for(int i = 0; i < nodes.getLength(); i++)
       {
-         if (elementBehavior.hasInitialConditionConfig())
+         ElementHolon childElement = new ElementHolon((Element)nodes.item(i));
+         new HolonCell(childElement.getName(), (HolonMatrix)holon);
+      }
+      
+      loggerManager.statusUpdate(String.format(
+            "   Installing boundaries in %s...",
+            holon
+            ));
+      nodes = 
+            element.getFirstChildElement("boundaries").getElementsByTagName("boundary");
+      for(int i = 0; i < nodes.getLength(); i++)
+      {
+         ElementBoundary childBoundaryElement = 
+               new ElementBoundary((Element)nodes.item(i));
+         HolonBoundary childBoundary = new HolonBoundary(
+               childBoundaryElement.getName(), 
+               childBoundaryElement.getCellName(),
+               (HolonMatrix)holon
+               );
+ 
+         // Install the adjacent boundary if specified.
+         ElementBoundary adjChildBoundaryElement = 
+               childBoundaryElement.getAdjacentBoundElement();
+         if (adjChildBoundaryElement.getElement() != null)
          {
-            InitialConditionTable behaviorTable = InitialConditionTable.getInstance(
-                  new File(
-                        workingDir 
-                        + File.separator 
-                        + elementBehavior.getAttributeInitConditionPath()
-                        ), 
-                  elementBehavior.getAttributeInitConditionDelimiter()
+            HolonBoundary adjBoundary = new HolonBoundary(
+                  adjChildBoundaryElement.getName(), 
+                  adjChildBoundaryElement.getCellName(),
+                  (HolonMatrix)holon
                   );
-            behaviorTableMap.put(elementBehavior.getFullBehaviorName(), behaviorTable);
+            childBoundary.setAdjacentBoundary(adjBoundary);
+            adjBoundary.setAdjacentBoundary(childBoundary);
          }
       }
-      for (ElementHolon cellElement: cellDoc.getCellList())
+   }
+   
+   @Override
+   protected void installBehaviors(ElementHolon element, Holon holon) throws Exception
+   {
+      super.installBehaviors(element, holon);
+      
+      loggerManager.statusUpdate(
+            "   Installing behaviors in cells and setting initial values..."
+            );
+      NodeList nodes = 
+            element.getFirstChildElement("cells").getElementsByTagName("cell");
+      for(int i = 0; i < nodes.getLength(); i++)
       {
-         HolonCell newCell = holon.getCell(cellElement.getName());
-         for (ElementBehavior elementBehavior: cellElement.getBehaviorList())
+         ElementHolon childElement = new ElementHolon((Element)nodes.item(i));
+         HolonCell childHolon = ((HolonMatrix)holon).getCell(childElement.getName());
+         for (ElementBehavior elementBehavior: childElement.getBehaviorList())
          {
             loadBehavior(
-                  newCell, 
+                  childHolon, 
                   elementBehavior, 
                   defaultBehaviorMap.get(elementBehavior.getFullBehaviorName()),
                   behaviorTableMap.get(elementBehavior.getFullBehaviorName())
                   );
          }
       }
-   }
-
-   @Override
-   protected void installBoundaryBehaviors() throws Exception 
-   {
-      HashMap<String, ElementBehavior> defaultBehaviorMap = boundDoc.getDefaultBehaviorMap();
-      HashMap<String, InitialConditionTable> behaviorTableMap = 
-            new HashMap<String, InitialConditionTable>();
-      for (ElementBehavior elementBehavior: defaultBehaviorMap.values())
+      
+      loggerManager.statusUpdate(
+            "   Installing behaviors in boundaries and setting initial values..."
+            );
+      nodes = 
+            element.getFirstChildElement("boundaries").getElementsByTagName("boundary");
+      for(int i = 0; i < nodes.getLength(); i++)
       {
-         if (elementBehavior.hasInitialConditionConfig())
-         {
-            InitialConditionTable behaviorTable = InitialConditionTable.getInstance(
-                  new File(
-                        workingDir 
-                        + File.separator 
-                        + elementBehavior.getAttributeInitConditionPath()
-                        ), 
-                  elementBehavior.getAttributeInitConditionDelimiter()
-                  );
-            behaviorTableMap.put(elementBehavior.getFullBehaviorName(), behaviorTable);
-         }
-      }
-      for (ElementBoundary elementBoundary: boundDoc.getBoundaryList())
-      {
-         HolonBoundary boundary = 
-               holon.getBoundary(elementBoundary.getName());
-         
-         // Install the adjacent boundary if specified.
-         ElementBoundary adjBoundElem = 
-               elementBoundary.getAdjacentBoundElement();
-         HolonBoundary adjBoundary = null;
-         if (adjBoundElem.getElement() != null)
-         {
-            adjBoundary = holon.getBoundary(adjBoundElem.getName());
-         }
+         ElementBoundary childBoundaryElement = 
+               new ElementBoundary((Element)nodes.item(i));
+         HolonBoundary childBoundary = 
+               ((HolonMatrix)holon).getBoundary(childBoundaryElement.getName());
          
          // Install behaviors and assign specified initial values for state variables.
-         for(ElementBehavior elementBehavior: elementBoundary.getBehaviorList())
+         for(ElementBehavior elementBehavior: childBoundaryElement.getBehaviorList())
          {
             loadBehavior(
-                  boundary, 
+                  childBoundary, 
                   elementBehavior, 
                   defaultBehaviorMap.get(elementBehavior.getFullBehaviorName()),
                   behaviorTableMap.get(elementBehavior.getFullBehaviorName())
                   );
          }
          
-         // Install asymmetric behaviors in adjacent boundary
-         if (adjBoundary != null)
+         // Install the adjacent boundary if specified.
+         ElementBoundary adjBoundElem = 
+               childBoundaryElement.getAdjacentBoundElement();
+         if (adjBoundElem.getElement() != null)
          {
+            HolonBoundary adjBoundary = childBoundary.getAdjacentBoundary();
             for (ElementBehavior elementBehavior: adjBoundElem.getBehaviorList())
             {
                loadBehavior(
@@ -178,161 +165,6 @@ public class MatrixBuilderXML extends MatrixBuilder {
             }
          }
       }
-   }
-
-   /**
-    * Load a matrix type behavior in the provided holon
-    * 
-    * @param targetHolon
-    *       holon in which to load the behavior
-    * @param element
-    *       XML element containing information about the behavior
-    * @throws Exception
-    *       if error in loading behavior
-    */
-   private Behavior loadBehavior(
-         Holon targetHolon, 
-         ElementBehavior element, 
-         ElementBehavior defaultElement,
-         InitialConditionTable initialConditionTable
-         ) throws Exception 
-   {
-      Behavior behavior = getBehaviorFromResource(element.getResourceName(), element.getName());
-      loadInitValues(targetHolon, behavior, element, defaultElement, initialConditionTable);
-      if (element.isInstalled())
-      {
-         addBehavior(targetHolon, behavior);
-         targetHolon.addInstalledBehavior(behavior);
-      }
-      else
-      {
-         Resource resource = resourceMap.get(element.getResourceName());
-         behavior = resource.getBehavior(element.getName());
-      }
-      return behavior;
-   }
-   
-   /**
-    * Load the initial values in the provided behavior element
-    * 
-    * @param targetHolon
-    *       holon in which initial values are loaded
-    * @param behavior
-    *       behavior for the states in which initial values are loaded
-    * @param element
-    *       behavior element with initial value information
-    * @throws Exception
-    *       if error in loading initial values
-    */
-   private void loadInitValues(
-         Holon targetHolon, 
-         Behavior behavior,
-         ElementBehavior element, 
-         ElementBehavior defaultElement, 
-         InitialConditionTable initialConditionTable
-         ) throws Exception 
-   {
-      if (initialConditionTable != null)
-      {
-         for (ElementInitValue elementInitValue: defaultElement.getInitValueList())
-         {
-            if (elementInitValue.getValue().equals(""))
-            {
-               initializeValue(
-                     targetHolon,
-                     behavior,
-                     elementInitValue.getStateVariableName(),
-                     initialConditionTable.find(
-                           behavior.getName() + "." + elementInitValue.getStateVariableName(),
-                           targetHolon.toString()
-                           ),
-                     elementInitValue.getTypeAlias()
-                     );
-            }
-         }
-      }
-      if (defaultElement != null)
-      {
-         for (ElementInitValue elementInitValue: defaultElement.getInitValueList())
-         {
-            if (!elementInitValue.getValue().equals(""))
-            {
-               initializeValue(
-                     targetHolon,
-                     behavior,
-                     elementInitValue.getStateVariableName(),
-                     elementInitValue.getValue(),
-                     elementInitValue.getTypeAlias()
-                     );
-            }
-         }
-      }
-      for (ElementInitValue elementInitValue: element.getInitValueList())
-      {
-         initializeValue(
-               targetHolon,
-               behavior,
-               elementInitValue.getStateVariableName(),
-               elementInitValue.getValue(),
-               elementInitValue.getTypeAlias()
-               );
-      }
-   }
-
-   @Override
-   protected HolonMatrix buildMatrix() throws Exception 
-   {
-      // Check for valid configuration file
-      if (!argMap.containsKey("config"))
-      {
-         throw new Exception(
-               "Must provide an argument for configuration file relative to working directory " +
-                     "(e.g. 'config=./config/config.xml')"
-               );
-      }
-      File configFile = new File(
-            workingDir.getAbsolutePath() + argMap.get("config")
-            );
-      if (!configFile.exists() || configFile.isDirectory()) 
-      {
-         throw new Exception(String.format(
-               "%s is an invalid configuration file.", 
-               configFile.getAbsolutePath()
-               ));
-      }
-      
-      // Parse the XML configuration file
-      XMLDocumentModelConfig document = new XMLDocumentModelConfig(configFile);
-      element = document.getBuilderElement();
-
-      // Create the matrix and install global behaviors (time behavior required)
-      loggerManager.statusUpdate(
-            "Building the matrix and installing global behaviors..."
-            );
-      ElementHolon holonElement = document.getHolonElement();
-      holon = new HolonMatrix(holonElement.getName(), this, controller);
-      for (ElementBehavior elementBehavior: 
-         document.getHolonElement().getBehaviorList())
-      {
-         Behavior behavior = resourceMap.get(elementBehavior.getResourceName())
-               .getBehavior(elementBehavior.getName());
-         if (elementBehavior.isInstalled())
-         {
-            addBehavior(holon, behavior);
-            holon.addInstalledBehavior(behavior);
-         }
-         loadInitValues(holon, behavior, elementBehavior, null, null);
-         loggerManager.statusUpdate(String.format(
-               "   Installed behavior %s", 
-               behavior.getName()
-               ));
-      }
-
-      // Install the cells and boundaries in the matrix
-      loggerManager.statusUpdate("Installing states in the matrix...");
-      installStates();
-      
-      return holon;
    }
 
 }
