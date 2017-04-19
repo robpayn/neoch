@@ -24,7 +24,8 @@ implements UpdaterLoad {
    {
       setUpdateDependenciesLoad();
       State storage = ((HolonBoundary)state.getParentHolon()).getCell().getStorage(
-            state.getBehavior().getResource());
+            state.getBehavior().getResource()
+            );
       storageProcessor = (ProcessorDoubleStorage)storage.getProcessor();
    }
    
