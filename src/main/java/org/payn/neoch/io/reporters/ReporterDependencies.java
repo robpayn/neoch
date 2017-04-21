@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import org.payn.chsm.Processor;
 import org.payn.chsm.io.reporters.ReporterFileSystem;
-import org.payn.neoch.ControllerNEOCH;
+import org.payn.chsm.processors.ControllerFiniteDiff;
 
 /**
  * Reporter for debugging dependencies
@@ -55,7 +55,7 @@ public class ReporterDependencies extends ReporterFileSystem {
    @Override
    public void write() throws Exception 
    {
-      ControllerNEOCH controller = (ControllerNEOCH)source.getProcessor();
+      ControllerFiniteDiff controller = (ControllerFiniteDiff)source.getProcessor();
       if (iterationValue.n == 0)
       {
          File file = new File(
@@ -77,28 +77,28 @@ public class ReporterDependencies extends ReporterFileSystem {
          BufferedWriter writer = new BufferedWriter(new FileWriter(file));
          writer.write("Trade phase:");
          writer.newLine();
-         for (Processor updater: controller.getTradeUpdaters())
+         for (Processor updater: controller.getChangeUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
          }
          writer.write("Load phase:");
          writer.newLine();
-         for (Processor updater: controller.getLoadUpdaters())
+         for (Processor updater: controller.getDeltaUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
          }
          writer.write("Storage phase:");
          writer.newLine();
-         for (Processor updater: controller.getStorageUpdaters())
+         for (Processor updater: controller.getStateUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
          }
          writer.write("State phase:");
          writer.newLine();
-         for (Processor updater: controller.getStateUpdaters())
+         for (Processor updater: controller.getInfoUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();

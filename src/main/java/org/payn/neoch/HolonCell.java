@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.payn.chsm.HolonBasic;
-import org.payn.chsm.Resource;
-import org.payn.chsm.State;
 import org.payn.chsm.values.ValueStateMap;
 
 /**
@@ -33,11 +31,6 @@ public class HolonCell extends HolonBasic {
    }
 
    /**
-    * Storage state variables associated with the cell
-    */
-   protected HashMap<Resource, State> storages;
-   
-   /**
     * Construct the cell in the given matrix
     * 
     * @param name
@@ -52,7 +45,6 @@ public class HolonCell extends HolonBasic {
       matrix.addCell(this);
       value = new ValueStateMap();
       boundaries = new HashMap<String, HolonBoundary>();
-      storages = new HashMap<Resource, State>();
    }
    
    /**
@@ -64,19 +56,6 @@ public class HolonCell extends HolonBasic {
    public void addBoundary(HolonBoundary boundary)
    {
       boundaries.put(boundary.getName(), boundary);
-   }
-   
-   /**
-    * Get the storage associated with the provided resource
-    * 
-    * @param resource
-    *       resource
-    * @return
-    *       storage associated with the resource
-    */
-   public State getStorage(Resource resource) 
-   {
-      return storages.get(resource);
    }
    
    /**
@@ -100,15 +79,6 @@ public class HolonCell extends HolonBasic {
        return list;
    }
 
-   @Override
-   public void trackProcessor(State state) throws Exception
-   {
-      if (UpdaterStorage.class.isInstance(state.getProcessor()))
-      {
-         storages.put(state.getBehavior().getResource(), state);
-      }
-   }
-   
    /**
     * Get the boundary with the provided name
     * 

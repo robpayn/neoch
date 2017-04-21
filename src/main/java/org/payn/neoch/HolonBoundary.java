@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.payn.chsm.HolonBasic;
 import org.payn.chsm.Resource;
 import org.payn.chsm.State;
+import org.payn.chsm.processors.auto.UpdaterDelta;
 import org.payn.chsm.values.ValueStateMap;
 
 /**
@@ -109,7 +110,7 @@ public class HolonBoundary extends HolonBasic {
    @Override
    public void trackProcessor(State state) throws Exception
    {
-      if (UpdaterLoad.class.isInstance(state.getProcessor()))
+      if (UpdaterDelta.class.isInstance(state.getProcessor()))
       {
          Resource resource = state.getBehavior().getResource();
          if (loads.containsKey(resource))
