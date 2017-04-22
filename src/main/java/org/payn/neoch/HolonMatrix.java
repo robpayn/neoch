@@ -5,8 +5,7 @@ import java.util.LinkedHashMap;
 
 import org.payn.chsm.HolonBasic;
 import org.payn.chsm.ModelBuilder;
-import org.payn.chsm.State;
-import org.payn.chsm.processors.ControllerFiniteDiff;
+import org.payn.chsm.finitedifference.processors.ControllerFiniteDiff;
 import org.payn.chsm.processors.ControllerHolon;
 
 /**
@@ -144,12 +143,6 @@ public class HolonMatrix extends HolonBasic {
    public void addBoundary(HolonBoundary boundary) 
    {
       boundMap.put(boundary.getName(), boundary);
-   }
-
-   @Override
-   public void trackProcessor(State state) throws Exception 
-   {
-      // Does not track processors
    }
 
 }

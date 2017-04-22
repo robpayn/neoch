@@ -3,7 +3,7 @@ package org.payn.neoch;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.payn.chsm.HolonBasic;
+import org.payn.chsm.finitedifference.HolonFiniteDifference;
 import org.payn.chsm.values.ValueStateMap;
 
 /**
@@ -12,7 +12,7 @@ import org.payn.chsm.values.ValueStateMap;
  * @author rob payn
  *
  */
-public class HolonCell extends HolonBasic {
+public class HolonCell extends HolonFiniteDifference {
    
    /**
     * Boundaries attached to the cell

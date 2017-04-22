@@ -1,7 +1,7 @@
 package org.payn.neoch.processors;
 
 import org.payn.chsm.State;
-import org.payn.chsm.processors.auto.ProcessorDoubleState;
+import org.payn.chsm.finitedifference.processors.ProcessorDoubleBaseState;
 import org.payn.neoch.HolonBoundary;
 
 /**
@@ -15,15 +15,15 @@ public abstract class ProcessorDoubleLoadSymmetric extends ProcessorDoubleLoad {
    /**
     * The adjacent storage processor to decrement with this load
     */
-   private ProcessorDoubleState storageProcessorAdjacent;
+   private ProcessorDoubleBaseState storageProcessorAdjacent;
 
    @Override
    public void setUpdateDependencies() throws Exception
    {
       super.setUpdateDependencies();
-      State storageAdjacent = ((HolonBoundary)state.getParentHolon()).getAdjacentBoundary().getCell().getRootState(
+      State storageAdjacent = ((HolonBoundary)state.getParentHolon()).getAdjacentBoundary().getCell().getBaseState(
             state.getBehavior().getResource());
-      storageProcessorAdjacent = (ProcessorDoubleState)storageAdjacent.getProcessor();
+      storageProcessorAdjacent = (ProcessorDoubleBaseState)storageAdjacent.getProcessor();
    }
    
    @Override

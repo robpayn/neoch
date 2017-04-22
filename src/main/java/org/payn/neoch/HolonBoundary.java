@@ -3,10 +3,10 @@ package org.payn.neoch;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.payn.chsm.HolonBasic;
 import org.payn.chsm.Resource;
 import org.payn.chsm.State;
-import org.payn.chsm.processors.auto.UpdaterDelta;
+import org.payn.chsm.finitedifference.HolonFiniteDifference;
+import org.payn.chsm.finitedifference.processors.interfaces.UpdaterDelta;
 import org.payn.chsm.values.ValueStateMap;
 
 /**
@@ -15,7 +15,7 @@ import org.payn.chsm.values.ValueStateMap;
  * @author rob payn
  *
  */
-public class HolonBoundary extends HolonBasic {
+public class HolonBoundary extends HolonFiniteDifference {
    
    /**
     * Attached cell
