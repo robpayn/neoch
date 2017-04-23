@@ -1,13 +1,16 @@
-package org.payn.neoch;
+package org.payn.neoch.io;
 
 import java.io.File;
 
 import org.payn.chsm.Holon;
-import org.payn.chsm.ModelBuilder;
-import org.payn.chsm.ModelBuilderXML;
-import org.payn.chsm.ModelLoader;
+import org.payn.chsm.io.ModelBuilder;
+import org.payn.chsm.io.ModelBuilderXML;
+import org.payn.chsm.io.ModelLoader;
 import org.payn.chsm.io.xmltools.ElementBehavior;
 import org.payn.chsm.io.xmltools.ElementHolon;
+import org.payn.neoch.HolonBoundary;
+import org.payn.neoch.HolonCell;
+import org.payn.neoch.HolonMatrix;
 import org.payn.neoch.io.xmltools.ElementBoundary;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

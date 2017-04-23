@@ -3,7 +3,7 @@ package org.payn.neoch.io.reporters;
 import java.io.File;
 import java.util.HashMap;
 
-import org.payn.chsm.ReporterFactoryXML;
+import org.payn.chsm.io.reporters.ReporterFactoryXML;
 import org.payn.chsm.io.reporters.ReporterIntervalFactoryXML;
 
 /**

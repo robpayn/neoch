@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import org.payn.chsm.HolonBasic;
-import org.payn.chsm.ModelBuilder;
-import org.payn.chsm.finitedifference.processors.ControllerFiniteDiff;
+import org.payn.chsm.io.ModelBuilder;
 import org.payn.chsm.processors.ControllerHolon;
+import org.payn.chsm.processors.finitedifference.ControllerFiniteDiff;
 
 /**
  * Matrix for a NEO lite simulation model

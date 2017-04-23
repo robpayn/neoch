@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
 
-import org.payn.chsm.Processor;
-import org.payn.chsm.finitedifference.processors.ControllerFiniteDiff;
 import org.payn.chsm.io.reporters.ReporterFileSystem;
+import org.payn.chsm.processors.Processor;
+import org.payn.chsm.processors.finitedifference.ControllerFiniteDiff;
 
 /**
  * Reporter for debugging dependencies

@@ -1,9 +1,9 @@
 package org.payn.neoch.processors;
 
 import org.payn.chsm.State;
-import org.payn.chsm.finitedifference.processors.ProcessorDoubleDelta;
-import org.payn.chsm.finitedifference.processors.ProcessorDoubleBaseState;
-import org.payn.chsm.finitedifference.processors.interfaces.UpdaterDelta;
+import org.payn.chsm.processors.finitedifference.ProcessorDoubleBaseState;
+import org.payn.chsm.processors.finitedifference.ProcessorDoubleDelta;
+import org.payn.chsm.processors.finitedifference.interfaces.UpdaterDelta;
 import org.payn.neoch.HolonBoundary;
 
 /**

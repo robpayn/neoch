@@ -4,11 +4,11 @@ import java.io.File;
 import java.util.HashMap;
 
 import org.payn.chsm.Holon;
-import org.payn.chsm.ModelLoaderXML;
+import org.payn.chsm.io.ModelLoaderXML;
 import org.payn.chsm.io.reporters.ReporterSingleThread;
 import org.payn.chsm.io.xmltools.XMLDocumentModelConfig;
 import org.payn.neoch.HolonMatrix;
-import org.payn.neoch.MatrixBuilderXML;
+import org.payn.neoch.io.MatrixBuilderXML;
 import org.payn.neoch.io.xmltools.DocumentBoundary;
 import org.payn.neoch.io.xmltools.DocumentCell;
 

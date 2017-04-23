@@ -1,7 +1,7 @@
 package org.payn.neoch.processors;
 
 import org.payn.chsm.State;
-import org.payn.chsm.finitedifference.processors.ProcessorDoubleBaseState;
+import org.payn.chsm.processors.finitedifference.ProcessorDoubleBaseState;
 import org.payn.neoch.HolonBoundary;
 
 /**
