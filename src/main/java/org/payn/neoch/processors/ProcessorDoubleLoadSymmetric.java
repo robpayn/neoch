@@ -21,8 +21,11 @@ public abstract class ProcessorDoubleLoadSymmetric extends ProcessorDoubleLoad {
    public void setUpdateDependencies() throws Exception
    {
       super.setUpdateDependencies();
-      State storageAdjacent = ((HolonBoundary)state.getParentHolon()).getAdjacentBoundary().getCell().getBaseState(
-            state.getBehavior().getResource());
+      HolonBoundary adjacentBoundary = 
+            ((HolonBoundary)state.getParentHolon()).getAdjacentBoundary();
+      State storageAdjacent = adjacentBoundary.getCell().getBaseState(
+            state.getBehavior().getResource()
+            );
       storageProcessorAdjacent = (ProcessorDoubleBaseState)storageAdjacent.getProcessor();
    }
    
