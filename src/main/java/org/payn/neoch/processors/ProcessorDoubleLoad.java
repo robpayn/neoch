@@ -1,7 +1,7 @@
 package org.payn.neoch.processors;
 
 import org.payn.chsm.State;
-import org.payn.chsm.processors.finitedifference.ProcessorDoubleBaseState;
+import org.payn.chsm.processors.finitedifference.ProcessorDoubleStore;
 import org.payn.chsm.processors.finitedifference.ProcessorDoubleDelta;
 import org.payn.chsm.processors.finitedifference.interfaces.UpdaterDelta;
 import org.payn.neoch.HolonBoundary;
@@ -19,10 +19,10 @@ implements UpdaterDelta {
    public void setUpdateDependencies() throws Exception
    {
       setUpdateDependenciesDelta();
-      State storage = ((HolonBoundary)state.getParentHolon()).getCell().getBaseState(
+      State storage = ((HolonBoundary)state.getParentHolon()).getCell().getStore(
             state.getBehavior().getResource()
             );
-      rootStateProcessor = (ProcessorDoubleBaseState)storage.getProcessor();
+      storeProcessor = (ProcessorDoubleStore)storage.getProcessor();
    }
    
 }
