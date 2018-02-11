@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import org.payn.chsm.HolonBasic;
 import org.payn.chsm.io.ModelBuilder;
 import org.payn.chsm.processors.ControllerHolon;
-import org.payn.chsm.processors.finitedifference.ControllerFiniteDiff;
 
 /**
  * Matrix for a NEO lite simulation model
@@ -70,9 +69,9 @@ public class HolonMatrix extends HolonBasic {
     * @return
     *       Processor cast to NEO controller
     */
-   public ControllerFiniteDiff getController()
+   public ControllerHolon getController()
    {
-      return (ControllerFiniteDiff)processor;
+      return (ControllerHolon)processor;
    }
 
    /**

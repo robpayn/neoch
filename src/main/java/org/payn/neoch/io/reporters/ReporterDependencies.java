@@ -77,7 +77,7 @@ public class ReporterDependencies extends ReporterFileSystem {
          BufferedWriter writer = new BufferedWriter(new FileWriter(file));
          writer.write("Trade phase:");
          writer.newLine();
-         for (Processor updater: controller.getChangeUpdaters())
+         for (Processor updater: controller.getPredeltaUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
@@ -91,14 +91,14 @@ public class ReporterDependencies extends ReporterFileSystem {
          }
          writer.write("Storage phase:");
          writer.newLine();
-         for (Processor updater: controller.getStateUpdaters())
+         for (Processor updater: controller.getStoreUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
          }
          writer.write("State phase:");
          writer.newLine();
-         for (Processor updater: controller.getInfoUpdaters())
+         for (Processor updater: controller.getPoststoreUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();

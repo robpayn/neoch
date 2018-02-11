@@ -35,7 +35,7 @@ public class MatrixBuilderXML extends ModelBuilderXML {
    {
       try 
       {
-         ModelBuilder builder = ModelLoader.loadBuilder(
+         ModelBuilder builder = ModelLoader.loadModel(
                new File(System.getProperty("user.dir")),
                args
                );
