@@ -6,7 +6,7 @@ import java.util.HashMap;
 import org.payn.chsm.Holon;
 import org.payn.chsm.io.ModelLoaderXML;
 import org.payn.chsm.io.reporters.ReporterSingleThread;
-import org.payn.chsm.io.xmltools.XMLDocumentModelConfig;
+import org.payn.chsm.io.xmltools.DocumentModelConfig;
 import org.payn.neoch.HolonMatrix;
 import org.payn.neoch.io.MatrixBuilderXML;
 import org.payn.neoch.io.xmltools.DocumentBoundary;
@@ -40,7 +40,7 @@ public class ReporterXMLSerial extends ReporterSingleThread {
    /**
     * Configuration xml document
     */
-   private XMLDocumentModelConfig configDoc;
+   private DocumentModelConfig configDoc;
 
    /**
     * Buffered iteration count

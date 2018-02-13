@@ -83,6 +83,7 @@ public class DocumentHolonMatrix extends DocumentHolon {
     * Get the XML element for the cells list
     * 
     * @return
+    *       cell list XML element
     */
    private Element getCellsElement() 
    {
@@ -118,6 +119,7 @@ public class DocumentHolonMatrix extends DocumentHolon {
     * Get the XML element for the boundaries list
     * 
     * @return
+    *       boundary list XML element
     */
    private Element getBoundariesElement() 
    {
