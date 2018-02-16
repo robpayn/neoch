@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
 
+import org.payn.chsm.finitediff.processors.ControllerFiniteDiff;
 import org.payn.chsm.io.reporters.ReporterFileSystem;
 import org.payn.chsm.processors.Processor;
-import org.payn.chsm.processors.finitedifference.ControllerFiniteDiff;
 
 /**
  * Reporter for debugging dependencies
@@ -77,7 +77,7 @@ public class ReporterDependencies extends ReporterFileSystem {
          BufferedWriter writer = new BufferedWriter(new FileWriter(file));
          writer.write("Trade phase:");
          writer.newLine();
-         for (Processor updater: controller.getPredeltaUpdaters())
+         for (Processor updater: controller.getPreauxiliaryUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
@@ -91,14 +91,14 @@ public class ReporterDependencies extends ReporterFileSystem {
          }
          writer.write("Storage phase:");
          writer.newLine();
-         for (Processor updater: controller.getStoreUpdaters())
+         for (Processor updater: controller.getCoreUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
          }
          writer.write("State phase:");
          writer.newLine();
-         for (Processor updater: controller.getPoststoreUpdaters())
+         for (Processor updater: controller.getPostauxiliaryUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();

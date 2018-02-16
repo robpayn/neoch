@@ -3,9 +3,9 @@ package org.payn.neoch;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.payn.chsm.HolonBasic;
+import org.payn.chsm.HolonStateValue;
 import org.payn.chsm.State;
-import org.payn.chsm.processors.finitedifference.interfaces.UpdaterDelta;
+import org.payn.chsm.finitediff.processors.interfaces.UpdaterDelta;
 import org.payn.chsm.resources.Resource;
 import org.payn.chsm.values.ValueStateMap;
 
@@ -15,7 +15,7 @@ import org.payn.chsm.values.ValueStateMap;
  * @author rob payn
  *
  */
-public class HolonBoundary extends HolonBasic {
+public class HolonBoundary extends HolonStateValue {
    
    /**
     * Attached cell
@@ -110,7 +110,7 @@ public class HolonBoundary extends HolonBasic {
    @Override
    public void trackProcessor(State state) throws Exception
    {
-      if (UpdaterDelta.class.isInstance(state.getProcessor()))
+      if (state.isProcessorType(UpdaterDelta.class))
       {
          Resource resource = state.getBehavior().getResource();
          if (loads.containsKey(resource))

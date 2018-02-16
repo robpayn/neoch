@@ -1,7 +1,7 @@
 package org.payn.neoch.processors;
 
 import org.payn.chsm.State;
-import org.payn.chsm.processors.finitedifference.ProcessorDoubleStore;
+import org.payn.chsm.finitediff.processors.ProcessorDoubleCore;
 import org.payn.neoch.HolonBoundary;
 
 /**
@@ -13,9 +13,9 @@ import org.payn.neoch.HolonBoundary;
 public abstract class ProcessorDoubleLoadSymmetric extends ProcessorDoubleLoad {
 
    /**
-    * The adjacent storage processor to decrement with this load
+    * The adjacent core processor to decrement with this load
     */
-   private ProcessorDoubleStore storageProcessorAdjacent;
+   private ProcessorDoubleCore coreProcessorAdjacent;
 
    @Override
    public void setUpdateDependencies() throws Exception
@@ -23,17 +23,17 @@ public abstract class ProcessorDoubleLoadSymmetric extends ProcessorDoubleLoad {
       super.setUpdateDependencies();
       HolonBoundary adjacentBoundary = 
             ((HolonBoundary)state.getParentHolon()).getAdjacentBoundary();
-      State storageAdjacent = adjacentBoundary.getCell().getStore(
+      State coreAdjacent = adjacentBoundary.getCell().getCore(
             state.getBehavior().getResource()
             );
-      storageProcessorAdjacent = (ProcessorDoubleStore)storageAdjacent.getProcessor();
+      coreProcessorAdjacent = (ProcessorDoubleCore)coreAdjacent.getProcessor();
    }
    
    @Override
-   public void updateStoreProcessor() throws Exception
+   public void updateCoreProcessor() throws Exception
    {
-      super.updateStoreProcessor();
-      storageProcessorAdjacent.decrementNetChange(value.n);
+      super.updateCoreProcessor();
+      coreProcessorAdjacent.decrementNetDelta(value.n);
    }
 
 }

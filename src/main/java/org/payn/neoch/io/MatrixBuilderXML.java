@@ -141,7 +141,7 @@ public class MatrixBuilderXML extends ModelBuilderXML {
          HolonBoundary childBoundary = 
                ((HolonMatrix)holon).getBoundary(childBoundaryElement.getName());
          
-         // Install behaviors and assign specified initial values for state variables.
+         // Install behaviors and assign specified initial values for states.
          for(ElementBehavior elementBehavior: childBoundaryElement.getBehaviorList())
          {
             loadBehavior(

@@ -1,9 +1,9 @@
 package org.payn.neoch.processors;
 
 import org.payn.chsm.State;
-import org.payn.chsm.processors.finitedifference.ProcessorDoubleStore;
-import org.payn.chsm.processors.finitedifference.ProcessorDoubleDelta;
-import org.payn.chsm.processors.finitedifference.interfaces.UpdaterDelta;
+import org.payn.chsm.finitediff.processors.ProcessorDoubleCore;
+import org.payn.chsm.finitediff.processors.ProcessorDoubleDelta;
+import org.payn.chsm.finitediff.processors.interfaces.UpdaterDelta;
 import org.payn.neoch.HolonBoundary;
 
 /**
@@ -19,10 +19,10 @@ implements UpdaterDelta {
    public void setUpdateDependencies() throws Exception
    {
       setUpdateDependenciesDelta();
-      State storage = ((HolonBoundary)state.getParentHolon()).getCell().getStore(
+      State core = ((HolonBoundary)state.getParentHolon()).getCell().getCore(
             state.getBehavior().getResource()
             );
-      storeProcessor = (ProcessorDoubleStore)storage.getProcessor();
+      coreProcessor = (ProcessorDoubleCore)core.getProcessor();
    }
    
 }

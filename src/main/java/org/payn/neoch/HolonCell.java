@@ -3,7 +3,7 @@ package org.payn.neoch;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.payn.chsm.HolonFiniteDiff;
+import org.payn.chsm.finitediff.HolonFiniteDiff;
 import org.payn.chsm.values.ValueStateMap;
 
 /**
