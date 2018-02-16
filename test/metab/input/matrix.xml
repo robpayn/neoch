@@ -1,0 +1,2654 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<holon name="matrix">
+   <behavior name="SimulationTime" resource="time">
+      <initval state="TimeInterval">5.0</initval>
+      <initval state="LastIteration">23040</initval>
+   </behavior>
+   <behavior name="reachavgtemperaturebound" resource="water">
+      <initval state="TempInterpolationType">linear</initval>
+      <initval state="TempDelimiter">space</initval>
+      <initval state="UpstreamTempInterpolationPath">./input/upstreamsondedata.txt</initval>
+      <initval state="DownstreamTempInterpolationPath">./input/downstreamsondedata.txt</initval>
+   </behavior>
+   <behavior name="doawexchangereach" resource="oxygen">
+      <initval state="AirPressure">682.0</initval>
+      <initval state="oxygenK600">4.42E-5</initval>
+   </behavior>
+   <behavior name="dophotosynthesisreach" resource="oxygen">
+      <initval state="PARInterpolationType">linear</initval>
+      <initval state="PARDelimiter">space</initval>
+      <initval state="PARInterpolationPath">./input/par.txt</initval>
+      <initval state="PToPARRatio">1.93E-7</initval>
+   </behavior>
+   <behavior name="dorespirationreach" resource="oxygen">
+      <initval state="DORespiration">-1.01E-4</initval>
+   </behavior>
+   <default>
+      <behavior name="channel" resource="water">
+         <inittable initialConditionDelimiter="space" initialConditionPath="./input/initialconditions_cell.txt"/>
+         <initval state="WaterHead"/>
+         <initval state="Y">0.0</initval>
+         <initval state="Length">100.0</initval>
+         <initval state="ActiveWidthAverage">129.0</initval>
+      </behavior>
+      <behavior name="dynamicwave" resource="water">
+         <inittable initialConditionDelimiter="space" initialConditionPath="./input/initialconditions_bound.txt"/>
+         <initval state="WaterFlow"/>
+         <initval state="Velocity"/>
+         <initval state="ActiveWidthAverage">129.0</initval>
+      </behavior>
+      <behavior name="wielefriction" resource="water">
+         <initval state="WieleInt">-14.81</initval>
+         <initval state="WieleSlope">11.9</initval>
+      </behavior>
+      <behavior name="storage" resource="oxygen">
+         <inittable initialConditionDelimiter="space" initialConditionPath="./input/initialconditions_cell.txt"/>
+         <initval state="oxygenConc"/>
+      </behavior>
+   </default>
+   <cells>
+      <cell name="cell001">
+         <behavior name="channel" resource="water">
+            <initval state="X">50.0</initval>
+            <initval state="BedElevation">104.065</initval>
+            <initval state="BankElevation">124.065</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell002">
+         <behavior name="channel" resource="water">
+            <initval state="X">150.0</initval>
+            <initval state="BedElevation">104.035</initval>
+            <initval state="BankElevation">124.035</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell003">
+         <behavior name="channel" resource="water">
+            <initval state="X">250.0</initval>
+            <initval state="BedElevation">104.005</initval>
+            <initval state="BankElevation">124.005</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell004">
+         <behavior name="channel" resource="water">
+            <initval state="X">350.0</initval>
+            <initval state="BedElevation">103.975</initval>
+            <initval state="BankElevation">123.975</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell005">
+         <behavior name="channel" resource="water">
+            <initval state="X">450.0</initval>
+            <initval state="BedElevation">103.945</initval>
+            <initval state="BankElevation">123.945</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell006">
+         <behavior name="channel" resource="water">
+            <initval state="X">550.0</initval>
+            <initval state="BedElevation">103.915</initval>
+            <initval state="BankElevation">123.915</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell007">
+         <behavior name="channel" resource="water">
+            <initval state="X">650.0</initval>
+            <initval state="BedElevation">103.885</initval>
+            <initval state="BankElevation">123.885</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell008">
+         <behavior name="channel" resource="water">
+            <initval state="X">750.0</initval>
+            <initval state="BedElevation">103.855</initval>
+            <initval state="BankElevation">123.855</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell009">
+         <behavior name="channel" resource="water">
+            <initval state="X">850.0</initval>
+            <initval state="BedElevation">103.825</initval>
+            <initval state="BankElevation">123.825</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell010">
+         <behavior name="channel" resource="water">
+            <initval state="X">950.0</initval>
+            <initval state="BedElevation">103.795</initval>
+            <initval state="BankElevation">123.795</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell011">
+         <behavior name="channel" resource="water">
+            <initval state="X">1050.0</initval>
+            <initval state="BedElevation">103.765</initval>
+            <initval state="BankElevation">123.765</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell012">
+         <behavior name="channel" resource="water">
+            <initval state="X">1150.0</initval>
+            <initval state="BedElevation">103.735</initval>
+            <initval state="BankElevation">123.735</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell013">
+         <behavior name="channel" resource="water">
+            <initval state="X">1250.0</initval>
+            <initval state="BedElevation">103.705</initval>
+            <initval state="BankElevation">123.705</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell014">
+         <behavior name="channel" resource="water">
+            <initval state="X">1350.0</initval>
+            <initval state="BedElevation">103.675</initval>
+            <initval state="BankElevation">123.675</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell015">
+         <behavior name="channel" resource="water">
+            <initval state="X">1450.0</initval>
+            <initval state="BedElevation">103.645</initval>
+            <initval state="BankElevation">123.645</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell016">
+         <behavior name="channel" resource="water">
+            <initval state="X">1550.0</initval>
+            <initval state="BedElevation">103.615</initval>
+            <initval state="BankElevation">123.615</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell017">
+         <behavior name="channel" resource="water">
+            <initval state="X">1650.0</initval>
+            <initval state="BedElevation">103.585</initval>
+            <initval state="BankElevation">123.585</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell018">
+         <behavior name="channel" resource="water">
+            <initval state="X">1750.0</initval>
+            <initval state="BedElevation">103.555</initval>
+            <initval state="BankElevation">123.555</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell019">
+         <behavior name="channel" resource="water">
+            <initval state="X">1850.0</initval>
+            <initval state="BedElevation">103.525</initval>
+            <initval state="BankElevation">123.525</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell020">
+         <behavior name="channel" resource="water">
+            <initval state="X">1950.0</initval>
+            <initval state="BedElevation">103.495</initval>
+            <initval state="BankElevation">123.495</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell021">
+         <behavior name="channel" resource="water">
+            <initval state="X">2050.0</initval>
+            <initval state="BedElevation">103.465</initval>
+            <initval state="BankElevation">123.465</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell022">
+         <behavior name="channel" resource="water">
+            <initval state="X">2150.0</initval>
+            <initval state="BedElevation">103.435</initval>
+            <initval state="BankElevation">123.435</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell023">
+         <behavior name="channel" resource="water">
+            <initval state="X">2250.0</initval>
+            <initval state="BedElevation">103.405</initval>
+            <initval state="BankElevation">123.405</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell024">
+         <behavior name="channel" resource="water">
+            <initval state="X">2350.0</initval>
+            <initval state="BedElevation">103.375</initval>
+            <initval state="BankElevation">123.375</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell025">
+         <behavior name="channel" resource="water">
+            <initval state="X">2450.0</initval>
+            <initval state="BedElevation">103.345</initval>
+            <initval state="BankElevation">123.345</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell026">
+         <behavior name="channel" resource="water">
+            <initval state="X">2550.0</initval>
+            <initval state="BedElevation">103.315</initval>
+            <initval state="BankElevation">123.315</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell027">
+         <behavior name="channel" resource="water">
+            <initval state="X">2650.0</initval>
+            <initval state="BedElevation">103.285</initval>
+            <initval state="BankElevation">123.285</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell028">
+         <behavior name="channel" resource="water">
+            <initval state="X">2750.0</initval>
+            <initval state="BedElevation">103.255</initval>
+            <initval state="BankElevation">123.255</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell029">
+         <behavior name="channel" resource="water">
+            <initval state="X">2850.0</initval>
+            <initval state="BedElevation">103.225</initval>
+            <initval state="BankElevation">123.225</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell030">
+         <behavior name="channel" resource="water">
+            <initval state="X">2950.0</initval>
+            <initval state="BedElevation">103.195</initval>
+            <initval state="BankElevation">123.195</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell031">
+         <behavior name="channel" resource="water">
+            <initval state="X">3050.0</initval>
+            <initval state="BedElevation">103.165</initval>
+            <initval state="BankElevation">123.165</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell032">
+         <behavior name="channel" resource="water">
+            <initval state="X">3150.0</initval>
+            <initval state="BedElevation">103.135</initval>
+            <initval state="BankElevation">123.135</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell033">
+         <behavior name="channel" resource="water">
+            <initval state="X">3250.0</initval>
+            <initval state="BedElevation">103.105</initval>
+            <initval state="BankElevation">123.105</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell034">
+         <behavior name="channel" resource="water">
+            <initval state="X">3350.0</initval>
+            <initval state="BedElevation">103.075</initval>
+            <initval state="BankElevation">123.075</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell035">
+         <behavior name="channel" resource="water">
+            <initval state="X">3450.0</initval>
+            <initval state="BedElevation">103.045</initval>
+            <initval state="BankElevation">123.045</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell036">
+         <behavior name="channel" resource="water">
+            <initval state="X">3550.0</initval>
+            <initval state="BedElevation">103.015</initval>
+            <initval state="BankElevation">123.015</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell037">
+         <behavior name="channel" resource="water">
+            <initval state="X">3650.0</initval>
+            <initval state="BedElevation">102.985</initval>
+            <initval state="BankElevation">122.985</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell038">
+         <behavior name="channel" resource="water">
+            <initval state="X">3750.0</initval>
+            <initval state="BedElevation">102.955</initval>
+            <initval state="BankElevation">122.955</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell039">
+         <behavior name="channel" resource="water">
+            <initval state="X">3850.0</initval>
+            <initval state="BedElevation">102.925</initval>
+            <initval state="BankElevation">122.925</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell040">
+         <behavior name="channel" resource="water">
+            <initval state="X">3950.0</initval>
+            <initval state="BedElevation">102.895</initval>
+            <initval state="BankElevation">122.895</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell041">
+         <behavior name="channel" resource="water">
+            <initval state="X">4050.0</initval>
+            <initval state="BedElevation">102.865</initval>
+            <initval state="BankElevation">122.865</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell042">
+         <behavior name="channel" resource="water">
+            <initval state="X">4150.0</initval>
+            <initval state="BedElevation">102.835</initval>
+            <initval state="BankElevation">122.835</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell043">
+         <behavior name="channel" resource="water">
+            <initval state="X">4250.0</initval>
+            <initval state="BedElevation">102.805</initval>
+            <initval state="BankElevation">122.805</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell044">
+         <behavior name="channel" resource="water">
+            <initval state="X">4350.0</initval>
+            <initval state="BedElevation">102.775</initval>
+            <initval state="BankElevation">122.775</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell045">
+         <behavior name="channel" resource="water">
+            <initval state="X">4450.0</initval>
+            <initval state="BedElevation">102.745</initval>
+            <initval state="BankElevation">122.745</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell046">
+         <behavior name="channel" resource="water">
+            <initval state="X">4550.0</initval>
+            <initval state="BedElevation">102.715</initval>
+            <initval state="BankElevation">122.715</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell047">
+         <behavior name="channel" resource="water">
+            <initval state="X">4650.0</initval>
+            <initval state="BedElevation">102.685</initval>
+            <initval state="BankElevation">122.685</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell048">
+         <behavior name="channel" resource="water">
+            <initval state="X">4750.0</initval>
+            <initval state="BedElevation">102.655</initval>
+            <initval state="BankElevation">122.655</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell049">
+         <behavior name="channel" resource="water">
+            <initval state="X">4850.0</initval>
+            <initval state="BedElevation">102.625</initval>
+            <initval state="BankElevation">122.625</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell050">
+         <behavior name="channel" resource="water">
+            <initval state="X">4950.0</initval>
+            <initval state="BedElevation">102.595</initval>
+            <initval state="BankElevation">122.595</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell051">
+         <behavior name="channel" resource="water">
+            <initval state="X">5050.0</initval>
+            <initval state="BedElevation">102.565</initval>
+            <initval state="BankElevation">122.565</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell052">
+         <behavior name="channel" resource="water">
+            <initval state="X">5150.0</initval>
+            <initval state="BedElevation">102.535</initval>
+            <initval state="BankElevation">122.535</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell053">
+         <behavior name="channel" resource="water">
+            <initval state="X">5250.0</initval>
+            <initval state="BedElevation">102.505</initval>
+            <initval state="BankElevation">122.505</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell054">
+         <behavior name="channel" resource="water">
+            <initval state="X">5350.0</initval>
+            <initval state="BedElevation">102.475</initval>
+            <initval state="BankElevation">122.475</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell055">
+         <behavior name="channel" resource="water">
+            <initval state="X">5450.0</initval>
+            <initval state="BedElevation">102.445</initval>
+            <initval state="BankElevation">122.445</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell056">
+         <behavior name="channel" resource="water">
+            <initval state="X">5550.0</initval>
+            <initval state="BedElevation">102.415</initval>
+            <initval state="BankElevation">122.415</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell057">
+         <behavior name="channel" resource="water">
+            <initval state="X">5650.0</initval>
+            <initval state="BedElevation">102.385</initval>
+            <initval state="BankElevation">122.385</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell058">
+         <behavior name="channel" resource="water">
+            <initval state="X">5750.0</initval>
+            <initval state="BedElevation">102.355</initval>
+            <initval state="BankElevation">122.355</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell059">
+         <behavior name="channel" resource="water">
+            <initval state="X">5850.0</initval>
+            <initval state="BedElevation">102.325</initval>
+            <initval state="BankElevation">122.325</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell060">
+         <behavior name="channel" resource="water">
+            <initval state="X">5950.0</initval>
+            <initval state="BedElevation">102.295</initval>
+            <initval state="BankElevation">122.295</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell061">
+         <behavior name="channel" resource="water">
+            <initval state="X">6050.0</initval>
+            <initval state="BedElevation">102.265</initval>
+            <initval state="BankElevation">122.265</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell062">
+         <behavior name="channel" resource="water">
+            <initval state="X">6150.0</initval>
+            <initval state="BedElevation">102.235</initval>
+            <initval state="BankElevation">122.235</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell063">
+         <behavior name="channel" resource="water">
+            <initval state="X">6250.0</initval>
+            <initval state="BedElevation">102.205</initval>
+            <initval state="BankElevation">122.205</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell064">
+         <behavior name="channel" resource="water">
+            <initval state="X">6350.0</initval>
+            <initval state="BedElevation">102.175</initval>
+            <initval state="BankElevation">122.175</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell065">
+         <behavior name="channel" resource="water">
+            <initval state="X">6450.0</initval>
+            <initval state="BedElevation">102.145</initval>
+            <initval state="BankElevation">122.145</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell066">
+         <behavior name="channel" resource="water">
+            <initval state="X">6550.0</initval>
+            <initval state="BedElevation">102.115</initval>
+            <initval state="BankElevation">122.115</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell067">
+         <behavior name="channel" resource="water">
+            <initval state="X">6650.0</initval>
+            <initval state="BedElevation">102.085</initval>
+            <initval state="BankElevation">122.085</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell068">
+         <behavior name="channel" resource="water">
+            <initval state="X">6750.0</initval>
+            <initval state="BedElevation">102.055</initval>
+            <initval state="BankElevation">122.055</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell069">
+         <behavior name="channel" resource="water">
+            <initval state="X">6850.0</initval>
+            <initval state="BedElevation">102.025</initval>
+            <initval state="BankElevation">122.025</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell070">
+         <behavior name="channel" resource="water">
+            <initval state="X">6950.0</initval>
+            <initval state="BedElevation">101.995</initval>
+            <initval state="BankElevation">121.995</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell071">
+         <behavior name="channel" resource="water">
+            <initval state="X">7050.0</initval>
+            <initval state="BedElevation">101.965</initval>
+            <initval state="BankElevation">121.965</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell072">
+         <behavior name="channel" resource="water">
+            <initval state="X">7150.0</initval>
+            <initval state="BedElevation">101.935</initval>
+            <initval state="BankElevation">121.935</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell073">
+         <behavior name="channel" resource="water">
+            <initval state="X">7250.0</initval>
+            <initval state="BedElevation">101.905</initval>
+            <initval state="BankElevation">121.905</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell074">
+         <behavior name="channel" resource="water">
+            <initval state="X">7350.0</initval>
+            <initval state="BedElevation">101.875</initval>
+            <initval state="BankElevation">121.875</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell075">
+         <behavior name="channel" resource="water">
+            <initval state="X">7450.0</initval>
+            <initval state="BedElevation">101.845</initval>
+            <initval state="BankElevation">121.845</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell076">
+         <behavior name="channel" resource="water">
+            <initval state="X">7550.0</initval>
+            <initval state="BedElevation">101.815</initval>
+            <initval state="BankElevation">121.815</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell077">
+         <behavior name="channel" resource="water">
+            <initval state="X">7650.0</initval>
+            <initval state="BedElevation">101.785</initval>
+            <initval state="BankElevation">121.785</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell078">
+         <behavior name="channel" resource="water">
+            <initval state="X">7750.0</initval>
+            <initval state="BedElevation">101.755</initval>
+            <initval state="BankElevation">121.755</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell079">
+         <behavior name="channel" resource="water">
+            <initval state="X">7850.0</initval>
+            <initval state="BedElevation">101.725</initval>
+            <initval state="BankElevation">121.725</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell080">
+         <behavior name="channel" resource="water">
+            <initval state="X">7950.0</initval>
+            <initval state="BedElevation">101.695</initval>
+            <initval state="BankElevation">121.695</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell081">
+         <behavior name="channel" resource="water">
+            <initval state="X">8050.0</initval>
+            <initval state="BedElevation">101.665</initval>
+            <initval state="BankElevation">121.665</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell082">
+         <behavior name="channel" resource="water">
+            <initval state="X">8150.0</initval>
+            <initval state="BedElevation">101.635</initval>
+            <initval state="BankElevation">121.635</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell083">
+         <behavior name="channel" resource="water">
+            <initval state="X">8250.0</initval>
+            <initval state="BedElevation">101.605</initval>
+            <initval state="BankElevation">121.605</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell084">
+         <behavior name="channel" resource="water">
+            <initval state="X">8350.0</initval>
+            <initval state="BedElevation">101.575</initval>
+            <initval state="BankElevation">121.575</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell085">
+         <behavior name="channel" resource="water">
+            <initval state="X">8450.0</initval>
+            <initval state="BedElevation">101.545</initval>
+            <initval state="BankElevation">121.545</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell086">
+         <behavior name="channel" resource="water">
+            <initval state="X">8550.0</initval>
+            <initval state="BedElevation">101.515</initval>
+            <initval state="BankElevation">121.515</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell087">
+         <behavior name="channel" resource="water">
+            <initval state="X">8650.0</initval>
+            <initval state="BedElevation">101.485</initval>
+            <initval state="BankElevation">121.485</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell088">
+         <behavior name="channel" resource="water">
+            <initval state="X">8750.0</initval>
+            <initval state="BedElevation">101.455</initval>
+            <initval state="BankElevation">121.455</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell089">
+         <behavior name="channel" resource="water">
+            <initval state="X">8850.0</initval>
+            <initval state="BedElevation">101.425</initval>
+            <initval state="BankElevation">121.425</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell090">
+         <behavior name="channel" resource="water">
+            <initval state="X">8950.0</initval>
+            <initval state="BedElevation">101.395</initval>
+            <initval state="BankElevation">121.395</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell091">
+         <behavior name="channel" resource="water">
+            <initval state="X">9050.0</initval>
+            <initval state="BedElevation">101.365</initval>
+            <initval state="BankElevation">121.365</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell092">
+         <behavior name="channel" resource="water">
+            <initval state="X">9150.0</initval>
+            <initval state="BedElevation">101.335</initval>
+            <initval state="BankElevation">121.335</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell093">
+         <behavior name="channel" resource="water">
+            <initval state="X">9250.0</initval>
+            <initval state="BedElevation">101.305</initval>
+            <initval state="BankElevation">121.305</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell094">
+         <behavior name="channel" resource="water">
+            <initval state="X">9350.0</initval>
+            <initval state="BedElevation">101.275</initval>
+            <initval state="BankElevation">121.275</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell095">
+         <behavior name="channel" resource="water">
+            <initval state="X">9450.0</initval>
+            <initval state="BedElevation">101.245</initval>
+            <initval state="BankElevation">121.245</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell096">
+         <behavior name="channel" resource="water">
+            <initval state="X">9550.0</initval>
+            <initval state="BedElevation">101.215</initval>
+            <initval state="BankElevation">121.215</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell097">
+         <behavior name="channel" resource="water">
+            <initval state="X">9650.0</initval>
+            <initval state="BedElevation">101.185</initval>
+            <initval state="BankElevation">121.185</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell098">
+         <behavior name="channel" resource="water">
+            <initval state="X">9750.0</initval>
+            <initval state="BedElevation">101.155</initval>
+            <initval state="BankElevation">121.155</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell099">
+         <behavior name="channel" resource="water">
+            <initval state="X">9850.0</initval>
+            <initval state="BedElevation">101.125</initval>
+            <initval state="BankElevation">121.125</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell100">
+         <behavior name="channel" resource="water">
+            <initval state="X">9950.0</initval>
+            <initval state="BedElevation">101.095</initval>
+            <initval state="BankElevation">121.095</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell101">
+         <behavior name="channel" resource="water">
+            <initval state="X">10050.0</initval>
+            <initval state="BedElevation">101.065</initval>
+            <initval state="BankElevation">121.065</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell102">
+         <behavior name="channel" resource="water">
+            <initval state="X">10150.0</initval>
+            <initval state="BedElevation">101.035</initval>
+            <initval state="BankElevation">121.035</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell103">
+         <behavior name="channel" resource="water">
+            <initval state="X">10250.0</initval>
+            <initval state="BedElevation">101.005</initval>
+            <initval state="BankElevation">121.005</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell104">
+         <behavior name="channel" resource="water">
+            <initval state="X">10350.0</initval>
+            <initval state="BedElevation">100.975</initval>
+            <initval state="BankElevation">120.975</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell105">
+         <behavior name="channel" resource="water">
+            <initval state="X">10450.0</initval>
+            <initval state="BedElevation">100.945</initval>
+            <initval state="BankElevation">120.945</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell106">
+         <behavior name="channel" resource="water">
+            <initval state="X">10550.0</initval>
+            <initval state="BedElevation">100.915</initval>
+            <initval state="BankElevation">120.915</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell107">
+         <behavior name="channel" resource="water">
+            <initval state="X">10650.0</initval>
+            <initval state="BedElevation">100.885</initval>
+            <initval state="BankElevation">120.885</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell108">
+         <behavior name="channel" resource="water">
+            <initval state="X">10750.0</initval>
+            <initval state="BedElevation">100.855</initval>
+            <initval state="BankElevation">120.855</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell109">
+         <behavior name="channel" resource="water">
+            <initval state="X">10850.0</initval>
+            <initval state="BedElevation">100.825</initval>
+            <initval state="BankElevation">120.825</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell110">
+         <behavior name="channel" resource="water">
+            <initval state="X">10950.0</initval>
+            <initval state="BedElevation">100.795</initval>
+            <initval state="BankElevation">120.795</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell111">
+         <behavior name="channel" resource="water">
+            <initval state="X">11050.0</initval>
+            <initval state="BedElevation">100.765</initval>
+            <initval state="BankElevation">120.765</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell112">
+         <behavior name="channel" resource="water">
+            <initval state="X">11150.0</initval>
+            <initval state="BedElevation">100.735</initval>
+            <initval state="BankElevation">120.735</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell113">
+         <behavior name="channel" resource="water">
+            <initval state="X">11250.0</initval>
+            <initval state="BedElevation">100.705</initval>
+            <initval state="BankElevation">120.705</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell114">
+         <behavior name="channel" resource="water">
+            <initval state="X">11350.0</initval>
+            <initval state="BedElevation">100.675</initval>
+            <initval state="BankElevation">120.675</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell115">
+         <behavior name="channel" resource="water">
+            <initval state="X">11450.0</initval>
+            <initval state="BedElevation">100.645</initval>
+            <initval state="BankElevation">120.645</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell116">
+         <behavior name="channel" resource="water">
+            <initval state="X">11550.0</initval>
+            <initval state="BedElevation">100.615</initval>
+            <initval state="BankElevation">120.615</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell117">
+         <behavior name="channel" resource="water">
+            <initval state="X">11650.0</initval>
+            <initval state="BedElevation">100.585</initval>
+            <initval state="BankElevation">120.585</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell118">
+         <behavior name="channel" resource="water">
+            <initval state="X">11750.0</initval>
+            <initval state="BedElevation">100.555</initval>
+            <initval state="BankElevation">120.555</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell119">
+         <behavior name="channel" resource="water">
+            <initval state="X">11850.0</initval>
+            <initval state="BedElevation">100.525</initval>
+            <initval state="BankElevation">120.525</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell120">
+         <behavior name="channel" resource="water">
+            <initval state="X">11950.0</initval>
+            <initval state="BedElevation">100.495</initval>
+            <initval state="BankElevation">120.495</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell121">
+         <behavior name="channel" resource="water">
+            <initval state="X">12050.0</initval>
+            <initval state="BedElevation">100.465</initval>
+            <initval state="BankElevation">120.465</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell122">
+         <behavior name="channel" resource="water">
+            <initval state="X">12150.0</initval>
+            <initval state="BedElevation">100.435</initval>
+            <initval state="BankElevation">120.435</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell123">
+         <behavior name="channel" resource="water">
+            <initval state="X">12250.0</initval>
+            <initval state="BedElevation">100.405</initval>
+            <initval state="BankElevation">120.405</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell124">
+         <behavior name="channel" resource="water">
+            <initval state="X">12350.0</initval>
+            <initval state="BedElevation">100.375</initval>
+            <initval state="BankElevation">120.375</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell125">
+         <behavior name="channel" resource="water">
+            <initval state="X">12450.0</initval>
+            <initval state="BedElevation">100.345</initval>
+            <initval state="BankElevation">120.345</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell126">
+         <behavior name="channel" resource="water">
+            <initval state="X">12550.0</initval>
+            <initval state="BedElevation">100.315</initval>
+            <initval state="BankElevation">120.315</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell127">
+         <behavior name="channel" resource="water">
+            <initval state="X">12650.0</initval>
+            <initval state="BedElevation">100.285</initval>
+            <initval state="BankElevation">120.285</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell128">
+         <behavior name="channel" resource="water">
+            <initval state="X">12750.0</initval>
+            <initval state="BedElevation">100.255</initval>
+            <initval state="BankElevation">120.255</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell129">
+         <behavior name="channel" resource="water">
+            <initval state="X">12850.0</initval>
+            <initval state="BedElevation">100.225</initval>
+            <initval state="BankElevation">120.225</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell130">
+         <behavior name="channel" resource="water">
+            <initval state="X">12950.0</initval>
+            <initval state="BedElevation">100.195</initval>
+            <initval state="BankElevation">120.195</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell131">
+         <behavior name="channel" resource="water">
+            <initval state="X">13050.0</initval>
+            <initval state="BedElevation">100.165</initval>
+            <initval state="BankElevation">120.165</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell132">
+         <behavior name="channel" resource="water">
+            <initval state="X">13150.0</initval>
+            <initval state="BedElevation">100.135</initval>
+            <initval state="BankElevation">120.135</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell133">
+         <behavior name="channel" resource="water">
+            <initval state="X">13250.0</initval>
+            <initval state="BedElevation">100.105</initval>
+            <initval state="BankElevation">120.105</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell134">
+         <behavior name="channel" resource="water">
+            <initval state="X">13350.0</initval>
+            <initval state="BedElevation">100.075</initval>
+            <initval state="BankElevation">120.075</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell135">
+         <behavior name="channel" resource="water">
+            <initval state="X">13450.0</initval>
+            <initval state="BedElevation">100.045</initval>
+            <initval state="BankElevation">120.045</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+      <cell name="cell136">
+         <behavior name="channel" resource="water">
+            <initval state="X">13550.0</initval>
+            <initval state="BedElevation">100.015</initval>
+            <initval state="BankElevation">120.015</initval>
+         </behavior>
+         <behavior name="storage" resource="oxygen"/>
+      </cell>
+   </cells>
+   <boundaries>
+      <boundary cell="cell001" name="boundext_cell001">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell001" name="boundext_001">
+         <behavior name="flowinterpolate" resource="water">
+            <initval state="InterpolationPath">./input/upstreamflow.txt</initval>
+            <initval state="InterpolationHeader">WaterFlow</initval>
+            <initval state="InterpolationType">linear</initval>
+            <initval state="Delimiter">space</initval>
+         </behavior>
+         <behavior name="flowbound" resource="oxygen"/>
+         <behavior name="concinterp" resource="oxygen">
+            <initval state="oxygenInterpolationPath">./input/upstreamsondedata.txt</initval>
+            <initval state="oxygenInterpolationHeader">oxygenConc</initval>
+            <initval state="oxygenInterpolationType">linear</initval>
+            <initval state="oxygenDelimiter">space</initval>
+         </behavior>
+      </boundary>
+      <boundary cell="cell002" name="boundext_cell002">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell002" name="bound002_001">
+         <adjacent cell="cell001" name="bound001_002"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell003" name="boundext_cell003">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell003" name="bound003_002">
+         <adjacent cell="cell002" name="bound002_003"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell004" name="boundext_cell004">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell004" name="bound004_003">
+         <adjacent cell="cell003" name="bound003_004"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell005" name="boundext_cell005">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell005" name="bound005_004">
+         <adjacent cell="cell004" name="bound004_005"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell006" name="boundext_cell006">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell006" name="bound006_005">
+         <adjacent cell="cell005" name="bound005_006"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell007" name="boundext_cell007">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell007" name="bound007_006">
+         <adjacent cell="cell006" name="bound006_007"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell008" name="boundext_cell008">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell008" name="bound008_007">
+         <adjacent cell="cell007" name="bound007_008"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell009" name="boundext_cell009">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell009" name="bound009_008">
+         <adjacent cell="cell008" name="bound008_009"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell010" name="boundext_cell010">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell010" name="bound010_009">
+         <adjacent cell="cell009" name="bound009_010"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell011" name="boundext_cell011">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell011" name="bound011_010">
+         <adjacent cell="cell010" name="bound010_011"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell012" name="boundext_cell012">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell012" name="bound012_011">
+         <adjacent cell="cell011" name="bound011_012"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell013" name="boundext_cell013">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell013" name="bound013_012">
+         <adjacent cell="cell012" name="bound012_013"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell014" name="boundext_cell014">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell014" name="bound014_013">
+         <adjacent cell="cell013" name="bound013_014"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell015" name="boundext_cell015">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell015" name="bound015_014">
+         <adjacent cell="cell014" name="bound014_015"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell016" name="boundext_cell016">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell016" name="bound016_015">
+         <adjacent cell="cell015" name="bound015_016"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell017" name="boundext_cell017">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell017" name="bound017_016">
+         <adjacent cell="cell016" name="bound016_017"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell018" name="boundext_cell018">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell018" name="bound018_017">
+         <adjacent cell="cell017" name="bound017_018"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell019" name="boundext_cell019">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell019" name="bound019_018">
+         <adjacent cell="cell018" name="bound018_019"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell020" name="boundext_cell020">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell020" name="bound020_019">
+         <adjacent cell="cell019" name="bound019_020"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell021" name="boundext_cell021">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell021" name="bound021_020">
+         <adjacent cell="cell020" name="bound020_021"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell022" name="boundext_cell022">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell022" name="bound022_021">
+         <adjacent cell="cell021" name="bound021_022"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell023" name="boundext_cell023">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell023" name="bound023_022">
+         <adjacent cell="cell022" name="bound022_023"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell024" name="boundext_cell024">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell024" name="bound024_023">
+         <adjacent cell="cell023" name="bound023_024"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell025" name="boundext_cell025">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell025" name="bound025_024">
+         <adjacent cell="cell024" name="bound024_025"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell026" name="boundext_cell026">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell026" name="bound026_025">
+         <adjacent cell="cell025" name="bound025_026"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell027" name="boundext_cell027">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell027" name="bound027_026">
+         <adjacent cell="cell026" name="bound026_027"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell028" name="boundext_cell028">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell028" name="bound028_027">
+         <adjacent cell="cell027" name="bound027_028"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell029" name="boundext_cell029">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell029" name="bound029_028">
+         <adjacent cell="cell028" name="bound028_029"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell030" name="boundext_cell030">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell030" name="bound030_029">
+         <adjacent cell="cell029" name="bound029_030"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell031" name="boundext_cell031">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell031" name="bound031_030">
+         <adjacent cell="cell030" name="bound030_031"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell032" name="boundext_cell032">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell032" name="bound032_031">
+         <adjacent cell="cell031" name="bound031_032"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell033" name="boundext_cell033">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell033" name="bound033_032">
+         <adjacent cell="cell032" name="bound032_033"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell034" name="boundext_cell034">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell034" name="bound034_033">
+         <adjacent cell="cell033" name="bound033_034"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell035" name="boundext_cell035">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell035" name="bound035_034">
+         <adjacent cell="cell034" name="bound034_035"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell036" name="boundext_cell036">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell036" name="bound036_035">
+         <adjacent cell="cell035" name="bound035_036"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell037" name="boundext_cell037">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell037" name="bound037_036">
+         <adjacent cell="cell036" name="bound036_037"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell038" name="boundext_cell038">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell038" name="bound038_037">
+         <adjacent cell="cell037" name="bound037_038"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell039" name="boundext_cell039">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell039" name="bound039_038">
+         <adjacent cell="cell038" name="bound038_039"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell040" name="boundext_cell040">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell040" name="bound040_039">
+         <adjacent cell="cell039" name="bound039_040"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell041" name="boundext_cell041">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell041" name="bound041_040">
+         <adjacent cell="cell040" name="bound040_041"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell042" name="boundext_cell042">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell042" name="bound042_041">
+         <adjacent cell="cell041" name="bound041_042"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell043" name="boundext_cell043">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell043" name="bound043_042">
+         <adjacent cell="cell042" name="bound042_043"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell044" name="boundext_cell044">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell044" name="bound044_043">
+         <adjacent cell="cell043" name="bound043_044"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell045" name="boundext_cell045">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell045" name="bound045_044">
+         <adjacent cell="cell044" name="bound044_045"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell046" name="boundext_cell046">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell046" name="bound046_045">
+         <adjacent cell="cell045" name="bound045_046"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell047" name="boundext_cell047">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell047" name="bound047_046">
+         <adjacent cell="cell046" name="bound046_047"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell048" name="boundext_cell048">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell048" name="bound048_047">
+         <adjacent cell="cell047" name="bound047_048"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell049" name="boundext_cell049">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell049" name="bound049_048">
+         <adjacent cell="cell048" name="bound048_049"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell050" name="boundext_cell050">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell050" name="bound050_049">
+         <adjacent cell="cell049" name="bound049_050"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell051" name="boundext_cell051">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell051" name="bound051_050">
+         <adjacent cell="cell050" name="bound050_051"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell052" name="boundext_cell052">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell052" name="bound052_051">
+         <adjacent cell="cell051" name="bound051_052"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell053" name="boundext_cell053">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell053" name="bound053_052">
+         <adjacent cell="cell052" name="bound052_053"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell054" name="boundext_cell054">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell054" name="bound054_053">
+         <adjacent cell="cell053" name="bound053_054"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell055" name="boundext_cell055">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell055" name="bound055_054">
+         <adjacent cell="cell054" name="bound054_055"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell056" name="boundext_cell056">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell056" name="bound056_055">
+         <adjacent cell="cell055" name="bound055_056"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell057" name="boundext_cell057">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell057" name="bound057_056">
+         <adjacent cell="cell056" name="bound056_057"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell058" name="boundext_cell058">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell058" name="bound058_057">
+         <adjacent cell="cell057" name="bound057_058"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell059" name="boundext_cell059">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell059" name="bound059_058">
+         <adjacent cell="cell058" name="bound058_059"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell060" name="boundext_cell060">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell060" name="bound060_059">
+         <adjacent cell="cell059" name="bound059_060"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell061" name="boundext_cell061">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell061" name="bound061_060">
+         <adjacent cell="cell060" name="bound060_061"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell062" name="boundext_cell062">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell062" name="bound062_061">
+         <adjacent cell="cell061" name="bound061_062"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell063" name="boundext_cell063">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell063" name="bound063_062">
+         <adjacent cell="cell062" name="bound062_063"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell064" name="boundext_cell064">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell064" name="bound064_063">
+         <adjacent cell="cell063" name="bound063_064"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell065" name="boundext_cell065">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell065" name="bound065_064">
+         <adjacent cell="cell064" name="bound064_065"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell066" name="boundext_cell066">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell066" name="bound066_065">
+         <adjacent cell="cell065" name="bound065_066"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell067" name="boundext_cell067">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell067" name="bound067_066">
+         <adjacent cell="cell066" name="bound066_067"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell068" name="boundext_cell068">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell068" name="bound068_067">
+         <adjacent cell="cell067" name="bound067_068"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell069" name="boundext_cell069">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell069" name="bound069_068">
+         <adjacent cell="cell068" name="bound068_069"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell070" name="boundext_cell070">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell070" name="bound070_069">
+         <adjacent cell="cell069" name="bound069_070"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell071" name="boundext_cell071">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell071" name="bound071_070">
+         <adjacent cell="cell070" name="bound070_071"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell072" name="boundext_cell072">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell072" name="bound072_071">
+         <adjacent cell="cell071" name="bound071_072"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell073" name="boundext_cell073">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell073" name="bound073_072">
+         <adjacent cell="cell072" name="bound072_073"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell074" name="boundext_cell074">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell074" name="bound074_073">
+         <adjacent cell="cell073" name="bound073_074"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell075" name="boundext_cell075">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell075" name="bound075_074">
+         <adjacent cell="cell074" name="bound074_075"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell076" name="boundext_cell076">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell076" name="bound076_075">
+         <adjacent cell="cell075" name="bound075_076"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell077" name="boundext_cell077">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell077" name="bound077_076">
+         <adjacent cell="cell076" name="bound076_077"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell078" name="boundext_cell078">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell078" name="bound078_077">
+         <adjacent cell="cell077" name="bound077_078"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell079" name="boundext_cell079">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell079" name="bound079_078">
+         <adjacent cell="cell078" name="bound078_079"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell080" name="boundext_cell080">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell080" name="bound080_079">
+         <adjacent cell="cell079" name="bound079_080"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell081" name="boundext_cell081">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell081" name="bound081_080">
+         <adjacent cell="cell080" name="bound080_081"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell082" name="boundext_cell082">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell082" name="bound082_081">
+         <adjacent cell="cell081" name="bound081_082"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell083" name="boundext_cell083">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell083" name="bound083_082">
+         <adjacent cell="cell082" name="bound082_083"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell084" name="boundext_cell084">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell084" name="bound084_083">
+         <adjacent cell="cell083" name="bound083_084"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell085" name="boundext_cell085">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell085" name="bound085_084">
+         <adjacent cell="cell084" name="bound084_085"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell086" name="boundext_cell086">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell086" name="bound086_085">
+         <adjacent cell="cell085" name="bound085_086"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell087" name="boundext_cell087">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell087" name="bound087_086">
+         <adjacent cell="cell086" name="bound086_087"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell088" name="boundext_cell088">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell088" name="bound088_087">
+         <adjacent cell="cell087" name="bound087_088"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell089" name="boundext_cell089">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell089" name="bound089_088">
+         <adjacent cell="cell088" name="bound088_089"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell090" name="boundext_cell090">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell090" name="bound090_089">
+         <adjacent cell="cell089" name="bound089_090"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell091" name="boundext_cell091">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell091" name="bound091_090">
+         <adjacent cell="cell090" name="bound090_091"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell092" name="boundext_cell092">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell092" name="bound092_091">
+         <adjacent cell="cell091" name="bound091_092"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell093" name="boundext_cell093">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell093" name="bound093_092">
+         <adjacent cell="cell092" name="bound092_093"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell094" name="boundext_cell094">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell094" name="bound094_093">
+         <adjacent cell="cell093" name="bound093_094"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell095" name="boundext_cell095">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell095" name="bound095_094">
+         <adjacent cell="cell094" name="bound094_095"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell096" name="boundext_cell096">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell096" name="bound096_095">
+         <adjacent cell="cell095" name="bound095_096"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell097" name="boundext_cell097">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell097" name="bound097_096">
+         <adjacent cell="cell096" name="bound096_097"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell098" name="boundext_cell098">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell098" name="bound098_097">
+         <adjacent cell="cell097" name="bound097_098"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell099" name="boundext_cell099">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell099" name="bound099_098">
+         <adjacent cell="cell098" name="bound098_099"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell100" name="boundext_cell100">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell100" name="bound100_099">
+         <adjacent cell="cell099" name="bound099_100"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell101" name="boundext_cell101">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell101" name="bound101_100">
+         <adjacent cell="cell100" name="bound100_101"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell102" name="boundext_cell102">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell102" name="bound102_101">
+         <adjacent cell="cell101" name="bound101_102"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell103" name="boundext_cell103">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell103" name="bound103_102">
+         <adjacent cell="cell102" name="bound102_103"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell104" name="boundext_cell104">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell104" name="bound104_103">
+         <adjacent cell="cell103" name="bound103_104"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell105" name="boundext_cell105">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell105" name="bound105_104">
+         <adjacent cell="cell104" name="bound104_105"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell106" name="boundext_cell106">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell106" name="bound106_105">
+         <adjacent cell="cell105" name="bound105_106"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell107" name="boundext_cell107">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell107" name="bound107_106">
+         <adjacent cell="cell106" name="bound106_107"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell108" name="boundext_cell108">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell108" name="bound108_107">
+         <adjacent cell="cell107" name="bound107_108"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell109" name="boundext_cell109">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell109" name="bound109_108">
+         <adjacent cell="cell108" name="bound108_109"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell110" name="boundext_cell110">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell110" name="bound110_109">
+         <adjacent cell="cell109" name="bound109_110"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell111" name="boundext_cell111">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell111" name="bound111_110">
+         <adjacent cell="cell110" name="bound110_111"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell112" name="boundext_cell112">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell112" name="bound112_111">
+         <adjacent cell="cell111" name="bound111_112"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell113" name="boundext_cell113">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell113" name="bound113_112">
+         <adjacent cell="cell112" name="bound112_113"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell114" name="boundext_cell114">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell114" name="bound114_113">
+         <adjacent cell="cell113" name="bound113_114"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell115" name="boundext_cell115">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell115" name="bound115_114">
+         <adjacent cell="cell114" name="bound114_115"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell116" name="boundext_cell116">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell116" name="bound116_115">
+         <adjacent cell="cell115" name="bound115_116"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell117" name="boundext_cell117">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell117" name="bound117_116">
+         <adjacent cell="cell116" name="bound116_117"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell118" name="boundext_cell118">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell118" name="bound118_117">
+         <adjacent cell="cell117" name="bound117_118"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell119" name="boundext_cell119">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell119" name="bound119_118">
+         <adjacent cell="cell118" name="bound118_119"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell120" name="boundext_cell120">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell120" name="bound120_119">
+         <adjacent cell="cell119" name="bound119_120"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell121" name="boundext_cell121">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell121" name="bound121_120">
+         <adjacent cell="cell120" name="bound120_121"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell122" name="boundext_cell122">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell122" name="bound122_121">
+         <adjacent cell="cell121" name="bound121_122"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell123" name="boundext_cell123">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell123" name="bound123_122">
+         <adjacent cell="cell122" name="bound122_123"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell124" name="boundext_cell124">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell124" name="bound124_123">
+         <adjacent cell="cell123" name="bound123_124"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell125" name="boundext_cell125">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell125" name="bound125_124">
+         <adjacent cell="cell124" name="bound124_125"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell126" name="boundext_cell126">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell126" name="bound126_125">
+         <adjacent cell="cell125" name="bound125_126"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell127" name="boundext_cell127">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell127" name="bound127_126">
+         <adjacent cell="cell126" name="bound126_127"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell128" name="boundext_cell128">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell128" name="bound128_127">
+         <adjacent cell="cell127" name="bound127_128"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell129" name="boundext_cell129">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell129" name="bound129_128">
+         <adjacent cell="cell128" name="bound128_129"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell130" name="boundext_cell130">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell130" name="bound130_129">
+         <adjacent cell="cell129" name="bound129_130"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell131" name="boundext_cell131">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell131" name="bound131_130">
+         <adjacent cell="cell130" name="bound130_131"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell132" name="boundext_cell132">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell132" name="bound132_131">
+         <adjacent cell="cell131" name="bound131_132"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell133" name="boundext_cell133">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell133" name="bound133_132">
+         <adjacent cell="cell132" name="bound132_133"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell134" name="boundext_cell134">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell134" name="bound134_133">
+         <adjacent cell="cell133" name="bound133_134"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell135" name="boundext_cell135">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell135" name="bound135_134">
+         <adjacent cell="cell134" name="bound134_135"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell136" name="boundext_cell136">
+         <behavior name="doawexchange" resource="oxygen"/>
+         <behavior name="dophotosynthesis" resource="oxygen"/>
+         <behavior name="dorespiration" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell136" name="bound136_135">
+         <adjacent cell="cell135" name="bound135_136"/>
+         <behavior name="dynamicwave" resource="water"/>
+         <behavior name="wielefriction" resource="water"/>
+         <behavior name="advection" resource="oxygen"/>
+      </boundary>
+      <boundary cell="cell136" name="bound136_ext">
+         <behavior name="dynamicwavedownstream" resource="water">
+            <initval state="UpstreamBoundaryName">bound136_135</initval>
+         </behavior>
+         <behavior name="flowbound" resource="oxygen">
+            <initval state="oxygenConc">0.0</initval>
+         </behavior>
+      </boundary>
+   </boundaries>
+</holon>

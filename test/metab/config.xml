@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+
+   <streamsimulator 
+      build = "true" 
+      writeMatrixFile = "true"
+      >
+      
+      <time 
+         timeInterval="5" 
+         lastIteration="23040" 
+         />
+      <initialConditions 
+         active = "true"
+         cellPath="./input/initialconditions_cell.txt" 
+         cellDelimiter="space" 
+         boundPath="./input/initialconditions_bound.txt" 
+         boundDelimiter="space"
+         />
+      <modelstructure 
+         numCells="136" 
+         cellName="cell" 
+         boundaryName="bound" 
+         />
+      <channelgeometry length="13600">
+         <elevation 
+            datum="100" 
+            bedSlope="0.0003" 
+            />
+         <activechannel 
+            averageWidth="129" 
+            depth="20" 
+            />
+      </channelgeometry>
+      <flow initialDepth="4.8" initialFlow="290">
+         <friction wieleInt="-14.81" wieleSlope="11.90" />
+         <upstreambound 
+            upstreamPath="./input/upstreamflow.txt" 
+            upstreamInterpType="linear" 
+            upstreamDelimiter="space" 
+            />
+      </flow>
+      <solute name="oxygen" active="true" initialConc="7.0">
+         <upstreambound 
+            upstreamPath="./input/upstreamsondedata.txt" 
+            upstreamInterpType="linear" 
+            upstreamDelimiter="space" 
+            />
+         <awexchange k600="4.42e-5" />
+         <photosynthesis 
+            pToPARRatio="1.93E-7" 
+            parPath="./input/par.txt" 
+            parType="linear" 
+            parDelimiter="space" 
+            />
+         <respiration respiration="-1.01E-4" />
+      </solute>
+      <temperature 
+         interpType="linear" 
+         delimiter="space" 
+         upstreamPath="./input/upstreamsondedata.txt" 
+         downstreamPath="./input/downstreamsondedata.txt" 
+         />
+      <atmosphere airPressure="682" />
+      
+   </streamsimulator>
+   
+   <reporters>
+      <reporter name="behavior" active="true">
+         <file 
+            fromworkingDir="true" 
+            outputpath="./output/behaviors" 
+            />
+         <interval interval="60" />
+         <delimiter value=" " />
+         <init active="false" />
+         <filter active="true">
+            <behavior 
+               name="water.dynamicwave" 
+               fileName="output.txt"
+               >
+               <state 
+                  name="matrix.bound121_120.WaterFlow" 
+                  headerName = "downstreamFlow" 
+                  />
+            </behavior>
+            <behavior 
+               name="water.flowinterpolate" 
+               fileName="output.txt"
+               >
+               <state 
+                  name="matrix.boundext_001.WaterFlow" 
+                  headerName = "upstreamFlow" 
+                  />
+            </behavior>
+            <behavior 
+               name="oxygen.storage" 
+               fileName="output.txt"
+               >
+               <state 
+                  name="matrix.cell120.oxygenConc" 
+                  headerName = "downstreamDO" 
+                  />
+            </behavior>
+            <behavior 
+               name="oxygen.concinterp" 
+               fileName="output.txt"
+               >
+               <state 
+                  name="matrix.boundext_001.oxygenConc" 
+                  headerName = "upstreamDO" 
+                  />
+            </behavior>
+         </filter>
+      </reporter>
+   </reporters>
+
+   <builder>
+      <xmlinput 
+         fromWorkingDir="true" 
+         holonFile=".\input\matrix.xml" 
+         />
+   </builder>
+
+</document>

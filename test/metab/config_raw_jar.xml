@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document pathroot="../bin/model.jar">
+
+   <builder classpath="org.payn.neoch.io.MatrixBuilderXML">
+      <xmlinput fromWorkingDir="true" holonFile="./input/matrix.xml" />
+   </builder>
+   
+   <loggers>
+      <logger classpath="org.payn.chsm.io.logger.LoggerSystemOut" />
+   </loggers>
+   
+   <processor classpath="org.payn.chsm.processors.finitedifference.ControllerRungeKuttaTwo" />
+
+   <resources>
+      <resource name="water" active="true" classpath="org.payn.resources.water.ResourceWater"/>
+      <resource name="oxygen" active="true" classpath="org.payn.resources.solute.ResourceSolute" />
+   </resources>
+
+   <reporters>
+      <reporter name="behavior" active="true" classpath="org.payn.chsm.io.reporters.ReporterBehaviorFactoryXML">
+         <file fromworkingDir="true" outputpath="./output/behaviors" />
+         <interval interval="60" />
+         <delimiter value=" " />
+         <init active="false" />
+         <filter active="true">
+            <behavior name="water.dynamicwave" fileName="output.txt">
+               <state name="matrix.bound121_120.WaterFlow" headerName = "downstreamFlow" />
+            </behavior>
+            <behavior name="water.flowinterpolate" fileName="output.txt">
+               <state name="matrix.boundext_001.WaterFlow" headerName = "upstreamFlow" />
+            </behavior>
+            <behavior name="oxygen.storage" fileName="output.txt">
+               <state name="matrix.cell120.oxygenConc" headerName = "downstreamDO" />
+            </behavior>
+            <behavior name="oxygen.concinterp" fileName="output.txt">
+               <state name="matrix.boundext_001.oxygenConc" headerName = "upstreamDO" />
+            </behavior>
+         </filter>
+      </reporter>
+   </reporters>
+
+</document>

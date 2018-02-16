@@ -75,28 +75,28 @@ public class ReporterDependencies extends ReporterFileSystem {
                outputDir + File.separator + "dependencies_exec.txt"
                );
          BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-         writer.write("Trade phase:");
+         writer.write("Preauxiliary phase:");
          writer.newLine();
          for (Processor updater: controller.getPreauxiliaryUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
          }
-         writer.write("Load phase:");
+         writer.write("Delta phase:");
          writer.newLine();
          for (Processor updater: controller.getDeltaUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
          }
-         writer.write("Storage phase:");
+         writer.write("Core phase:");
          writer.newLine();
          for (Processor updater: controller.getCoreUpdaters())
          {
             writer.write(updater.toString());
             writer.newLine();
          }
-         writer.write("State phase:");
+         writer.write("Postauxiliary phase:");
          writer.newLine();
          for (Processor updater: controller.getPostauxiliaryUpdaters())
          {
