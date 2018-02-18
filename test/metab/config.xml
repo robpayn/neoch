@@ -66,7 +66,11 @@
    </streamsimulator>
    
    <reporters>
-      <reporter name="behavior" active="true">
+      <reporter 
+         name = "summary" 
+         type = "behavior" 
+         active = "true"
+         >
          <file 
             fromworkingDir="true" 
             outputpath="./output/behaviors" 
